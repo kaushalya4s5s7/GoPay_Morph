@@ -72,7 +72,7 @@ const LoginForm: React.FC<LoginFormProps> = ({
         subheading = "Login to manage your crypto payroll.";
     }
     return (
-        <div className="relative w-full max-w-xl mx-auto rounded-2xl bg-gradient-to-br from-white/60 via-neutral-100/40 to-white/10 dark:from-zinc-900/60 dark:via-zinc-800/40 dark:to-zinc-900/10 backdrop-blur-xl border border-white/30 dark:border-zinc-700/40 shadow-xl p-6 sm:p-10">
+        <div className="relative w-full max-w-xl mx-auto rounded-2xl bg-gradient-to-br from-black/60 via-black-100/40 to-white/10 dark:from-zinc-900/60 dark:via-zinc-800/40 dark:to-zinc-900/10 backdrop-blur-xl border border-white/30 dark:border-zinc-700/40 shadow-xl p-6 sm:p-10">
             <h2 className="text-xl sm:text-3xl font-bold text-neutral-800 dark:text-neutral-200">{heading}</h2>
             <p className="mt-2 max-w-sm text-sm sm:text-lg text-neutral-600 dark:text-neutral-300">{subheading}</p>
             <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
