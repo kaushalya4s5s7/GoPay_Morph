@@ -543,6 +543,7 @@ export const Component = () => {
       const progress = Math.min(scrollY / maxScroll, 1);
       
       setScrollProgress(progress);
+
       const newSection = Math.floor(progress * totalSections);
       setCurrentSection(newSection);
 
@@ -578,12 +579,7 @@ export const Component = () => {
         // Use the same smoothing approach
         mountain.userData.targetZ = targetZ;
         const location = mountain.position.z
-        if (progress > 0.7) {
-          mountain.position.z = 600000;
-        }
-        if (progress < 0.7) {
-          mountain.position.z = refs.locations[i]
-        }
+        
       });
       if (refs.nebula) {
         refs.nebula.position.z = refs.mountains[3].position.z;
@@ -671,7 +667,14 @@ const splitTitle = (text: SplitTitleProps['text']): React.ReactElement[] => {
 
         {/* Scroll progress indicator */}
         <div ref={scrollProgressRef} className="scroll-progress" style={{ visibility: 'hidden' }}>
-          {/* ... scroll progress content ... */}
+         
+         <div className="scroll-text">SCROLL</div>
+<div className="progress-track">
+  <div className="progress-fill" style={{ width: `${scrollProgress * 100}%` }} />
+</div>
+<div className="section-counter">
+  {String(currentSection + 1).padStart(2, '0')} / {String(titles.length).padStart(2, '0')}
+</div> {/* ... scroll progress content ... */}
         </div>
       </div>
       
