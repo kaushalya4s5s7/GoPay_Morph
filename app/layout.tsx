@@ -16,6 +16,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "GoPay",
+  
   description: "Web3 Finance Infrastructure",
 };
 

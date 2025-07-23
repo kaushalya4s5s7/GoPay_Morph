@@ -292,11 +292,11 @@ body {
 }
 
 .hero-title {
-  font-size: larger;
-  font-weight: 500;
+  font-size: 8rem; /* Adjust as needed */
+    font-weight: 800;
 
   letter-spacing: 0.05em;
-  text-shadow: 0 2px 16px rgba(120, 0, 255, 0.25), 0 1px 0 #df3131;
+  text-shadow: 0 2px 16px rgba(245, 34, 34, 0.25), 0 1px 0 #df3131;
   /* Optional: animate gradient */
   background: linear-gradient(90deg, #a855f7, #38bdf8, #f472b6);
   background-size: 200% 200%;
@@ -320,8 +320,18 @@ body {
 }
 
 .hero-subtitle {
-  text-shadow: 0 1px 8px rgba(137, 228, 175, 0.772), 0 1px 0 #df3131;
-  opacity: 0.85;
+  text-shadow: 0 1px 8px rgba(217, 230, 222, 0.772), 0 1px 0 #df3131;
+  opacity: 1.0;
+  animation: fadeInUp 1s cubic-bezier(.68,-0.55,.27,1.55) forwards;
+}
+.subtitle-line{
+  font-style: var(--color-1);
+  font-variant: var(--color-1);
+}
+.cosmos-subtitle{
+  text-decoration-color: #38bdf8;
+  text-shadow: 0 1px 8px rgba(217, 230, 222, 0.772), 0 1px 0 #df3131;
+  opacity: 1.0;
   animation: fadeInUp 1s cubic-bezier(.68,-0.55,.27,1.55) forwards;
 }
 @keyframes fadeInUp {
