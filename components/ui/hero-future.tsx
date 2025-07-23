@@ -6,6 +6,10 @@ import { useMemo, useRef, useState, useEffect } from 'react';
 import * as THREE from 'three/webgpu';
 import { bloom } from 'three/examples/jsm/tsl/display/BloomNode.js';
 import { Mesh } from 'three';
+import GradientButtonObj from './gradient-button';
+import ServiceModal from '../intro/ServiceModal';
+import { useRouter } from 'next/navigation';
+const GradientButton = GradientButtonObj.GradientButton;
 
 import {
   abs,
@@ -24,6 +28,7 @@ import {
   mix,
   add
 } from 'three/tsl';
+import { ZIndex, zIndexFactorOffset } from '@tsparticles/engine';
 
 const TEXTUREMAP = { src: 'https://i.postimg.cc/XYwvXN8D/img-4.png' };
 const DEPTHMAP = { src: 'https://i.postimg.cc/2SHKQh2q/raw-4.webp' };
@@ -168,13 +173,23 @@ const Scene = () => {
   );
 };
 
-export const Html = () => {
+
+export const Html: React.FC = ()=> {
   const titleWords = 'Pay Your WorkForce'.split(' ');
   const subtitle = 'Global payroll and compliance made easy';
   const [visibleWords, setVisibleWords] = useState(0);
   const [subtitleVisible, setSubtitleVisible] = useState(false);
   const [delays, setDelays] = useState<number[]>([]);
   const [subtitleDelay, setSubtitleDelay] = useState(0);
+  const router = useRouter();
+  const service = {
+        
+        
+        path: "/pages/auth?mode=payroll"
+    };
+
+  
+     
 
   useEffect(() => {
     // Только на клиенте: генерируем случайные задержки для глитча
@@ -193,10 +208,10 @@ export const Html = () => {
   }, [visibleWords, titleWords.length]);
 
   return (
-    <div className="h-svh">
-      <div className="h-svh uppercase items-center w-full absolute z-60 px-10 flex justify-center flex-col">
+    <div className="h-svh relative flex flex-col items-center justify-center w-full">
+      <div className="h-svh uppercase items-center w-full absolute z-60 px-10 flex justify-center flex-col pointer-events-none">
         <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold">
-          <div className="flex space-x-2 lg:space-x-6 overflow-hidden text-white">
+          <div className="flex  space-x-2 lg:space-x-6 overflow-hidden text-white" >
             {titleWords.map((word, index) => (
               <div
                 key={index}
@@ -217,20 +232,6 @@ export const Html = () => {
           </div>
         </div>
       </div>
-
-      <button
-        className="explore-btn"
-        style={{ animationDelay: '2.2s' }}
-      >
-        Scroll to explore
-        <span className="explore-arrow">
-          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg" className="arrow-svg">
-            <path d="M11 5V17" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-            <path d="M6 12L11 17L16 12" stroke="white" strokeWidth="2" strokeLinecap="round"/>
-          </svg>
-        </span>
-      </button>
-
       <Canvas
         flat
         gl={async (props) => {
@@ -242,6 +243,14 @@ export const Html = () => {
         <PostProcessing fullScreenEffect={true} />
         <Scene />
       </Canvas>
+      {/* Button absolutely positioned at bottom center of hero section */}
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex justify-center gap-8 z-50 w-full max-w-xl">
+        <GradientButton onClick={() => {
+                                    router.push(service.path);
+                                    
+                                }}>Get Started</GradientButton>
+      </div>
+     
     </div>
   );
 };
