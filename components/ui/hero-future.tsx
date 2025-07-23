@@ -9,6 +9,7 @@ import { Mesh } from 'three';
 import GradientButtonObj from './gradient-button';
 import ServiceModal from '../intro/ServiceModal';
 import { useRouter } from 'next/navigation';
+import { cn } from '@/lib/utils';
 const GradientButton = GradientButtonObj.GradientButton;
 
 import {
@@ -209,6 +210,16 @@ export const Html: React.FC = ()=> {
 
   return (
     <div className="h-svh relative flex flex-col items-center justify-center w-full">
+        
+      {/* Grid overlay */}
+      <div
+        className={cn(
+          "absolute inset-1",
+          "[background-size:40px_40px]",
+          "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
+          "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
+        )}
+      />
       <div className="h-svh uppercase items-center w-full absolute z-60 px-10 flex justify-center flex-col pointer-events-none">
         <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold">
           <div className="flex  space-x-2 lg:space-x-6 overflow-hidden text-white" >
