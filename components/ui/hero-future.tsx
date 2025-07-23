@@ -184,16 +184,11 @@ export const Html: React.FC = ()=> {
   const [subtitleDelay, setSubtitleDelay] = useState(0);
   const router = useRouter();
   const service = {
-        
-        
         path: "/pages/auth?mode=payroll"
     };
 
-  
-     
-
   useEffect(() => {
-    // Только на клиенте: генерируем случайные задержки для глитча
+    // Only on client: generate random delays for glitch effect
     setDelays(titleWords.map(() => Math.random() * 0.07));
     setSubtitleDelay(Math.random() * 0.1);
   }, [titleWords.length]);
@@ -209,62 +204,74 @@ export const Html: React.FC = ()=> {
   }, [visibleWords, titleWords.length]);
 
   return (
-    <div className="h-svh relative flex flex-col items-center justify-center w-full">
+    
+    <div className='h-svh relative'>
         
-      {/* Grid overlay */}
-      <div
-        className={cn(
-          "absolute inset-1",
-          "[background-size:40px_40px]",
-          "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
-          "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
-        )}
-      />
-      <div className="h-svh uppercase items-center w-full absolute z-60 px-10 flex justify-center flex-col pointer-events-none">
-        <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold">
-          <div className="flex  space-x-2 lg:space-x-6 overflow-hidden text-white" >
-            {titleWords.map((word, index) => (
-              <div
-                key={index}
-                className={index < visibleWords ? 'fade-in' : ''}
-                style={{ animationDelay: `${index * 0.13 + (delays[index] || 0)}s`, opacity: index < visibleWords ? undefined : 0 }}
-              >
-                {word}
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="text-xs md:text-xl xl:text-2xl 2xl:text-3xl mt-2 overflow-hidden text-white font-bold">
-          <div
-            className={subtitleVisible ? 'fade-in-subtitle' : ''}
-            style={{ animationDelay: `${titleWords.length * 0.13 + 0.2 + subtitleDelay}s`, opacity: subtitleVisible ? undefined : 0 }}
-          >
-            {subtitle}
-          </div>
-        </div>
-      </div>
-      <Canvas
-        flat
-        gl={async (props) => {
-          const renderer = new THREE.WebGPURenderer(props as any);
-          await renderer.init();
-          return renderer;
-        }}
-      >
-        <PostProcessing fullScreenEffect={true} />
-        <Scene />
-      </Canvas>
-      {/* Button absolutely positioned at bottom center of hero section */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex justify-center gap-8 z-50 w-full max-w-xl">
-        <GradientButton onClick={() => {
+      {/* Top horizontal white line crossing both verticals, extends beyond them */}
+      <div className="absolute" style={{ top: '60px', left: '0', right: '0', height: '1px', background: 'white', opacity: 0.8, zIndex: 100 }} />
+      {/* Left vertical white line, starts at top-10px and ends at bottom-10px */}
+      <div className="absolute" style={{ top: '0px', bottom: '10px', left: '60px', width: '1px', background: 'white', opacity: 0.8, zIndex: 100 }} />
+      {/* Right vertical white line, starts at top-10px and ends at bottom-10px */}
+      <div className="absolute" style={{ top: '0px', bottom: '10px', right: '60px', width: '1px', background: 'white', opacity: 0.8, zIndex: 100 }} />
+       <div className="absolute top-1  left-8/9 -translate-x-1/2 z-[80] ">
+          <GradientButton onClick={() => {
                                     router.push(service.path);
-                                    
                                 }}>Get Started</GradientButton>
-      </div>
+        </div>
+            <div className="absolute" style={{ top: '0px', bottom: 'calc(100% - 60px)', right: '250px', width: '1px', background: 'white', opacity: 0.8, zIndex: 100 }} />
+
+      {/* Main content area */}
+      <div className="h-svh w-full flex flex-col items-center justify-center bg-black">
+        {/* Grid overlay / Text Container */}
+        {/* Needs to be absolute and have a high z-index to sit on top of the canvas. */}
+        <div className="h-svh uppercase items-center w-full absolute z-[90] px-10 flex justify-center flex-col pointer-events-none">
+          <div className="text-3xl md:text-5xl xl:text-6xl 2xl:text-7xl font-extrabold">
+            <div className="flex  space-x-2 lg:space-x-6 overflow-hidden text-white" >
+              {titleWords.map((word, index) => (
+                <div
+                  key={index}
+                  className={index < visibleWords ? 'fade-in' : ''}
+                  style={{ animationDelay: `${index * 0.13 + (delays[index] || 0)}s`, opacity: index < visibleWords ? undefined : 0 }}
+                >
+                  {word}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="text-xs md:text-xl xl:text-2xl 2xl:text-3xl mt-2 overflow-hidden text-white font-bold">
+            <div
+              className={subtitleVisible ? 'fade-in-subtitle' : ''}
+              style={{ animationDelay: `${titleWords.length * 0.13 + 0.2 + subtitleDelay}s`, opacity: subtitleVisible ? undefined : 0 }}
+            >
+              {subtitle}
+            </div>
+          </div>
+        </div>
+
+        {/* Three.js Canvas */}
+        {/* The canvas itself should be absolute and occupy the full space, with a lower z-index. */}
+        <Canvas
+          flat
+          gl={async (props) => {
+            const renderer = new THREE.WebGPURenderer(props as any);
+            await renderer.init();
+            return renderer;
+          }}
+          className="absolute inset-0 z-0" // Canvas is z-0, ensuring it's at the bottom
+        >
+          <PostProcessing fullScreenEffect={true} />
+          <Scene />
+        </Canvas>
+
+        {/* Button absolutely positioned at bottom center of hero section */}
+        {/* Needs to be absolute and have a high z-index. */}
+        <div className="absolute bottom-10  left-1/2 -translate-x-1/2  text-white z-[80] ">
+          Global payroll made simple — automate payments, stay compliant, and focus on growth
+        </div>
      
+      </div>
     </div>
   );
 };
 
 export default Html;
-
