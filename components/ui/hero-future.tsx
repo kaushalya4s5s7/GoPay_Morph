@@ -213,12 +213,20 @@ export const Html: React.FC = ()=> {
       <div className="absolute" style={{ top: '0px', bottom: '10px', left: '60px', width: '1px', background: 'white', opacity: 0.8, zIndex: 100 }} />
       {/* Right vertical white line, starts at top-10px and ends at bottom-10px */}
       <div className="absolute" style={{ top: '0px', bottom: '10px', right: '60px', width: '1px', background: 'white', opacity: 0.8, zIndex: 100 }} />
-       <div className="absolute top-1  left-8/9 -translate-x-1/2 z-[80] ">
-          <GradientButton onClick={() => {
+       <div className="absolute top-1 ml-2 left-8/9 -translate-x-1/2 z-[80] ">
+          <GradientButton variant={
+"variant"          } onClick={() => {
                                     router.push(service.path);
                                 }}>Get Started</GradientButton>
         </div>
             <div className="absolute" style={{ top: '0px', bottom: 'calc(100% - 60px)', right: '250px', width: '1px', background: 'white', opacity: 0.8, zIndex: 100 }} />
+<div className="absolute top-1 ml-1  left-[76%] -translate-x-1/2 z-[80]">
+          <GradientButton variant={
+"variant"          } onClick={() => {
+                                    router.push("/pages/about");
+                                }}>About</GradientButton>
+        </div>
+            <div className="absolute" style={{ top: '0px', bottom: 'calc(100% - 60px)', right: '440px', width: '1px', background: 'white', opacity: 0.8, zIndex: 100 }} />
 
       {/* Main content area */}
       <div className="h-svh w-full flex flex-col items-center justify-center bg-black">

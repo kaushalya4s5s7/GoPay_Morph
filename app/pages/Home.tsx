@@ -1,14 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import useFullPageLoader from '@/hooks/usePageLoader';
 import Loader from '@/components/ui/loader';
-import { Dock } from '@/components/home/Dock';
 import  Hero  from '@/components/home/Hero';
-import Intro from '@/components/home/Intro';
 import Features from '@/components/home/Features';
-import Footer from '@/components/home/Footer';
-import Stats from '@/components/home/Stats';
-import Horizon from '@/components/home/Horizon'; // Assuming Horizon is defined elsewhere
-
+import Horizon from '@/components/home/horizon'; // Assuming Horizon is defined elsewhere
+import FeaturesPage from '@/components/home/BentoFeatures'; // Assuming Bento is defined elsewhere
 
 // Define props for HomePage
 interface HomePageProps {
@@ -25,9 +21,9 @@ function HomePage({ onShowSplash }: HomePageProps) { // Accept the prop
     const sections = [
         { id: "Hero", component:<Hero/>, label: "Hero" }, // Assuming Hero is defined elsewhere
         { id: "horizon", component: <Horizon />, label: "Horizon" }, // Assuming Horizon is defined elsewhere
+       {id:"Bento", component: <FeaturesPage />, label: "Bento"}, // Assuming Bento is defined elsewhere
         { id: "features", component: <Features />, label: "Features" },
-        { id: "data", component: <Stats />, label: "Analytics" },
-        { id: "footer", component: <Footer />, label: "Footer" }
+
     ];
 
     // Enhanced smooth scrolling function
@@ -159,13 +155,7 @@ function HomePage({ onShowSplash }: HomePageProps) { // Accept the prop
             ))}
 
             {/* Dock positioned at the bottom center */}
-            <div className="fixed top-4 left-8/10 -translate-x-1/2 z-30">
-                <Dock
-                    activeSection={activeSection}
-                    onSectionChange={scrollToSection}
-                    onShowSplash={onShowSplash} // Pass the handler down
-                />
-            </div>
+           
         </div>
     );
 }
