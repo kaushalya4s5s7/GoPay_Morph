@@ -500,7 +500,7 @@ export const Component = () => {
       tl.from(titleChars, {
         y: 200,
         opacity: 0,
-        duration: 1.5,
+        duration: 2.5,
         stagger: 0.05,
         ease: "power4.out"
       }, "-=0.5");
@@ -593,21 +593,23 @@ export const Component = () => {
   }, [totalSections]);
 
   // Section titles and subtitles
-  const titles = ['HORIZON', 'COSMOS', 'INFINITY'];
-  const subtitles = [
-    {
-      line1: 'Where vision meets reality,',
-      line2: 'we shape the future of tomorrow'
-    },
-    {
-      line1: 'Beyond the boundaries of imagination,',
-      line2: 'lies the universe of possibilities'
-    },
-    {
-      line1: 'In the space between thought and creation,',
-      line2: 'we find the essence of true innovation'
-    }
-  ];
+ const titles = ['CONNECT', 'COMPLY', 'EMPOWER'];
+
+const subtitles = [
+  {
+    line1: 'Your entire global workforce,',
+    line2: 'connected by one seamless payment system'
+  },
+  {
+    line1: 'Navigate international regulations with ease,',
+    line2: 'ensuring accurate and timely pay for everyone'
+  },
+  {
+    line1: 'Unlock your business potential,',
+    line2: 'by removing the boundaries of global payroll'
+  }
+];
+  
 
   // Animate title/subtitle on section change
   useEffect(() => {
@@ -624,7 +626,7 @@ export const Component = () => {
         tl.to([titleRef.current, subtitleRef.current], {
           opacity: 1,
           y: 0,
-          duration: 0.7,
+          duration: 1.0,
           ease: 'power2.out'
         });
       }
