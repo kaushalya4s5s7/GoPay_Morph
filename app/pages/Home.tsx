@@ -7,6 +7,7 @@ import Horizon from '@/components/home/horizon'; // Assuming Horizon is defined 
 import FeaturesPage from '@/components/home/BentoFeatures'; // Assuming Bento is defined elsewhere
 import Footer from '@/components/home/Footer';
 import FullViewport from '@/components/home/FullViewport';
+import { cn } from '@/lib/utils';
 
 // Define props for HomePage
 interface HomePageProps {
@@ -25,12 +26,15 @@ function HomePage({ onShowSplash }: HomePageProps) { // Accept the prop
 
                         { id: "horizon", component: <Horizon />, label: "Horizon" }, // Assuming Horizon is defined elsewhere
 
-{ id: "features", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
-{ id: "features", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
-{ id: "features", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
-{ id: "features", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
-{ id: "features", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
-{ id: "features", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
+{ id: "features1", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
+{ id: "features2", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
+{ id: "features3", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
+{ id: "features4", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
+{ id: "features5", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
+{ id: "features6", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
+{ id: "features7", component: <FullViewport />, label: "Features" },
+{ id: "features8", component: <FullViewport />, label: "Features" },
+{ id: "features9", component: <FullViewport />, label: "Features" },
 
         // { id: "features", component: <Features />, label: "Features" },
         { id: "footer", component: <Footer />, label: "Footer" } // Assuming Footer is defined elsewhere
@@ -159,10 +163,24 @@ function HomePage({ onShowSplash }: HomePageProps) { // Accept the prop
                     key={section.id}
                     id={section.id}
                     ref={el => { sectionRefs.current[index] = el; }}
-                        className={
-      section.id === "horizon"
-        ? "w-screen h-[1000vh]" // Custom height for 'horizon'
-        : "w-screen h-screen"
+                    className={
+                        cn(
+                            section.id==="Hero"
+                            ? "w-screen h-screen z-10" // Custom z-index for Hero
+                            :section.id === "horizon"
+                            ? "w-screen h-[1000vh]" // Custom height for 'horizon'
+                            : section.id === "footer"
+                                ? "position-fixed" // Example custom class for footer
+                                : section.id === "features2"
+                                    ? "w-screen h-screen " // Example custom class for features2
+                                    : section.id === "features3"
+                                        ? "w-screen h-screen " // Example custom class for features3
+                                        : section.id === "features4"
+                                            ? "w-screen h-screen " // Example custom class for features4
+                                            : section.id === "features5"
+                                                ? "w-screen h-screen " // Example custom class for features5
+                                                : "w-screen h-screen")
+
     }
                 >
                     {section.component}
