@@ -386,7 +386,7 @@ export const Component: React.FC = () => {
       if (refs.nebula) {
         const material = refs.nebula.material as THREE.ShaderMaterial;
         if (material.uniforms) {
-          material.uniforms.time.value = time * 0.5;
+          material.uniforms.time.value = time * 5;
         }
       }
 
@@ -483,58 +483,64 @@ export const Component: React.FC = () => {
     if (!isReady) return;
     
     // Set initial states to prevent flash
-    gsap.set([menuRef.current, titleRef.current, subtitleRef.current, scrollProgressRef.current], {
-      visibility: 'visible'
-    });
+    const elements = [
+      menuRef.current,
+      titleRef.current,
+      subtitleRef.current,
+      scrollProgressRef.current,
+    ].filter(Boolean); // Filter out null refs
 
-    const tl = gsap.timeline();
+    let tl: gsap.core.Timeline | null = null;
 
-    // Animate menu
-    if (menuRef.current) {
-      tl.from(menuRef.current, {
-        x: -100,
-        opacity: 0,
-        duration: 1,
-        ease: "power3.out"
+    if (elements.length > 0) {
+      gsap.set(elements, {
+        visibility: 'visible'
       });
-    }
 
-    // Animate title with split text
-    if (titleRef.current) {
-      const titleChars = titleRef.current.querySelectorAll('.title-char');
-      tl.from(titleChars, {
-        y: 200,
-        opacity: 0,
-        duration: 1.5,
-        stagger: 0.05,
-        ease: "power4.out"
-      }, "-=0.5");
-    }
+      tl = gsap.timeline();
 
-    // Animate subtitle lines
-    if (subtitleRef.current) {
-      const subtitleLines = subtitleRef.current.querySelectorAll('.subtitle-line');
-      tl.from(subtitleLines, {
-        y: 50,
-        opacity: 0,
-        duration: 1,
-        stagger: 0.2,
-        ease: "power3.out"
-      }, "-=0.8");
-    }
+      // Animate menu
+      
 
-    // Animate scroll indicator
-    if (scrollProgressRef.current) {
-      tl.from(scrollProgressRef.current, {
-        opacity: 0,
-        y: 50,
-        duration: 1,
-        ease: "power2.out"
-      }, "-=0.5");
+      // Animate title with split text
+      if (titleRef.current) {
+        const titleChars = titleRef.current.querySelectorAll('.title-char');
+        tl.from(titleChars, {
+          y: 200,
+          opacity: 0,
+          duration: 1.5,
+          stagger: 0.05,
+          ease: "power4.out"
+        }, "-=0.5");
+      }
+
+      // Animate subtitle lines
+      if (subtitleRef.current) {
+        const subtitleLines = subtitleRef.current.querySelectorAll('.subtitle-line');
+        tl.from(subtitleLines, {
+          y: 50,
+          opacity: 0,
+          duration: 1,
+          stagger: 0.2,
+          ease: "power3.out"
+        }, "-=0.8");
+      }
+
+      // Animate scroll indicator
+      if (scrollProgressRef.current) {
+        tl.from(scrollProgressRef.current, {
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          ease: "power2.out"
+        }, "-=0.5");
+      }
     }
 
     return () => {
-      tl.kill();
+      if (tl) {
+        tl.kill();
+      }
     };
   }, [isReady]);
 
@@ -613,38 +619,31 @@ export const Component: React.FC = () => {
 
   // Section titles and subtitles for dynamic rendering
   const titles: Record<number, string> = {
-    0: 'HORIZON',
-    1: 'COSMOS',
-    2: 'INFINITY'
-  };
+    0: 'GLOBAL PAYROLL',
+    1: 'BULK PAYMENTS',
+    2: 'ESCROW ENGINE'
+  }
   const subtitles: Record<number, SectionContent> = {
     0: {
-      line1: 'Where vision meets reality,',
-      line2: 'we shape the future of tomorrow'
+     line1: 'One-click payroll for teams across the globe,',
+      line2: 'compliant, secure, and built onchain'
     },
     1: {
-      line1: 'Beyond the boundaries of imagination,',
-      line2: 'lies the universe of possibilities'
+     line1: 'Pay thousands in seconds, gas-optimized and secure,',
+      line2: 'bulk transactions, simplified for Web3 teams'
     },
     2: {
-      line1: 'In the space between thought and creation,',
-      line2: 'we find the essence of true innovation'
+      line1: 'Hold funds with confidence, release with certainty,',
+      line2: 'escrow that moves as fast as your deals'
     }
   };
 
   return (
-    <div ref={containerRef} className="hero-container cosmos-style">
+    <div ref={containerRef} className="h-screen hero-container cosmos-style">
       <canvas ref={canvasRef} className="hero-canvas" />
       
       {/* Side menu */}
-      <div ref={menuRef} className="side-menu" style={{ visibility: 'hidden' }}>
-        <div className="menu-icon">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <div className="vertical-text">SPACE</div>
-      </div>
+      
 
       {/* Main content - now dynamic based on currentSection */}
       <div className="hero-content cosmos-content">
@@ -661,40 +660,10 @@ export const Component: React.FC = () => {
         </div>
       </div>
 
-      {/* Scroll progress indicator */}
-      <div ref={scrollProgressRef} className="scroll-progress" style={{ visibility: 'hidden' }}>
-        <div className="scroll-text">SCROLL</div>
-        <div className="progress-track">
-          <div 
-            className="progress-fill" 
-            style={{ width: `${scrollProgress * 100}%` }}
-          />
-        </div>
-        <div className="section-counter">
-          {String(currentSection).padStart(2, '0')} / {String(totalSections).padStart(2, '0')}
-        </div>
-      </div>
+     
 
       {/* Additional sections for scrolling (unchanged) */}
-      <div className="scroll-sections">
-       {[...Array(2)].map((_, i: number) => {
-          return (
-            <section key={i} className="content-section h-[70vh]">
-              <h1 className="hero-title">
-                {titles[i+1] || 'DEFAULT'}
-              </h1>
-              <div className="hero-subtitle cosmos-subtitle">
-                <p className="subtitle-line">
-                  {subtitles[i+1]?.line1}
-                </p>
-                <p className="subtitle-line">
-                  {subtitles[i+1]?.line2}
-                </p>
-              </div>
-            </section>
-          );
-        })}
-      </div>
+     
     </div>
   );
 };

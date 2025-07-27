@@ -2,9 +2,9 @@ import Component from "../ui/horizon-hero-section";
 
 const Horizon = () => {
     return (
-        <div className="relative sticky-container">
+        <div className="w-full h-full">
             <Component />
         </div>
     );
 }
-export default Horizon; 
+export default Horizon;
