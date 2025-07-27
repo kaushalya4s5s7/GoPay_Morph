@@ -149,6 +149,8 @@ const Scene = () => {
 
 // **Improved HTML Component**
 export const Html: React.FC = () => {
+
+    
     const router = useRouter();
     const service = { path: "/pages/auth?mode=payroll" };
     const headlineWords = ['Pay', 'Your', 'Workforce'];
@@ -157,7 +159,7 @@ export const Html: React.FC = () => {
 
 
         // Main container with background
-        <div className='h-screen w-full relative' >
+        <div className='h-screen w-full bg-black relative' >
             
             {/* Three.js Canvas - Placed in the background */}
             <Canvas
@@ -193,13 +195,17 @@ export const Html: React.FC = () => {
             {/* Main Content Area */}
             <div className="flex flex-col items-center justify-center">
                  {/* Unified Headline with Staggered Animation */}
-                 <h1 className="text-6xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-tight">
-                    {headlineWords.map((word, index) => (
-                        <span key={index} className="inline-block animate-fade-in-up opacity-0" style={{ animationDelay: `${0.8 + index * 0.15}s` }}>
-                            {word}&nbsp;
-                        </span>
-                    ))}
-                </h1>
+                <h1 className="text-6xl md:text-8xl lg:text-9xl  tracking-tighter leading-tight text-white">
+  {headlineWords.map((word, index) => (
+    <span
+      key={index}
+      className="inline-block animate-fade-in-up opacity-0"
+      style={{ animationDelay: `${0.8 + index * 0.15}s` }}
+    >
+      {word}&nbsp;
+    </span>
+  ))}
+</h1>
 
                 {/* Subtitle with Animation */}
                 <p

@@ -276,14 +276,19 @@ body {
   left: 0;
 }
 
+
 .hero-content {
+  font-size: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  z-index: 10;
+  z-index: 100;
+  width: 100%;
 }
+
 
 /* Ensure the body has no margin/padding that could interfere */
 body {
@@ -304,6 +309,7 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
 
 @keyframes gradientMove {
   0% { background-position: 0% 50%; }
@@ -339,17 +345,7 @@ body {
   to { opacity: 1; transform: translateY(0);}
 }
 
-.hero-content {
-  font-size: 48px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  position: fixed;
-  z-index: 2;
-  width: 100%;
-}
+
 @layer components {
   .gradient-button {
     @apply relative appearance-none cursor-pointer;
@@ -446,3 +442,104 @@ body {
     --border-color-1: hsla(320, 75%, 90%, 0.2);
     --border-color-2: hsla(320, 50%, 90%, 0.75);
   }}
+
+  @keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
+.sticky-footer {
+    position: sticky;
+}
+
+.hud-grid {
+  background-image:
+    linear-gradient(to right, rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-10%); }
+  100% { transform: translateY(110%); }
+}
+
+.scanline-effect {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  overflow: hidden;
+}
+
+.scanline-effect::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to bottom, rgba(0, 255, 255, 0.15) 0%, rgba(0, 255, 255, 0) 100%);
+  animation: scanline 8s linear infinite;
+}
+
+/* Blinking cursor for the button */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: blink 1.2s step-end infinite;
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.main-headline.active {
+    /* Style for the headline once it starts typing */
+}
+
+/* globals.css */
+
+@keyframes draw-border {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease forwards;
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes rotate {
+  from {
+    --angle: 0deg;
+  }
+  to {
+    --angle: 360deg;
+  }
+}
+
+.animated-border {
+  background-image: conic-gradient(from var(--angle), #a855f7, #38bdf8, #8a2be2, #a855f7);
+  animation: rotate 4s linear infinite;
+}
