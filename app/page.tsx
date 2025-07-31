@@ -3,7 +3,6 @@
 import React, { useEffect } from 'react'
 import useFullPageLoader from '@/hooks/usePageLoader'
 import Loader from '@/components/ui/loader'
-import Splashscreen from '@/app/pages/SplashScreen';
 import { motion, AnimatePresence } from 'framer-motion'
 import Home from '@/app/pages/Home'; // Assuming Hero is the component exported from '@/pages/Home'
 
@@ -31,22 +30,7 @@ const LandingPage = () => {
 
     return (
         <>
-            <AnimatePresence mode="wait">
-                {isSplashscreenVisible ? (
-                    <motion.div
-                        key="splashscreen"
-                        initial={{ opacity: 1 }}
-                        exit={{
-                            opacity: 0,
-                            transition: { duration: 0.8, ease: "easeInOut" }
-                        }}
-                        className="fixed inset-0 z-50 dark:bg-black"
-                    >
-                        <Splashscreen onFinish={() => {
-                            setSplashscreenVisible(false);
-                        }} />
-                    </motion.div>
-                ) : (
+            
                     <motion.div
                         key="home-content"
                         initial={{ opacity: 0 }}
@@ -60,10 +44,9 @@ const LandingPage = () => {
                         }}
                         className="bg-transparent"
                     >
-                        <Home onShowSplash={handleShowSplash} />
+                        <Home  />
                     </motion.div>
-                )}
-            </AnimatePresence>
+             
         </>
     );
 };

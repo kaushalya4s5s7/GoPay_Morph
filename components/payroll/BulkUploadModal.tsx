@@ -4,7 +4,6 @@ import React, { useState, DragEvent, ChangeEvent, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Upload, FileSpreadsheet, AlertCircle, Check, XCircle, Loader, Download } from "lucide-react";
 import { employerApi } from "@/api/employerApi";
-import { CardSpotlight } from "@/components/ui/cardSpotlight";
 
 interface BulkUploadModalProps {
   isOpen: boolean;

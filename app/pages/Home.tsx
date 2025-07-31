@@ -2,19 +2,15 @@ import React, { useState, useRef, useEffect } from 'react';
 import useFullPageLoader from '@/hooks/usePageLoader';
 import Loader from '@/components/ui/loader';
 import  Hero  from '@/components/home/Hero';
-import Features from '@/components/home/Features';
 import Horizon from '@/components/home/horizon'; // Assuming Horizon is defined elsewhere
-import FeaturesPage from '@/components/home/BentoFeatures'; // Assuming Bento is defined elsewhere
 import Footer from '@/components/home/Footer';
 import FullViewport from '@/components/home/FullViewport';
 import { cn } from '@/lib/utils';
 
 // Define props for HomePage
-interface HomePageProps {
-    onShowSplash?: () => void; // Add prop for handling splash screen visibility
-}
 
-function HomePage({ onShowSplash }: HomePageProps) { // Accept the prop
+
+function HomePage() { // Accept the prop
     const containerRef = useRef<HTMLDivElement>(null);
     const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
     const [activeSection, setActiveSection] = useState(0);
