@@ -166,15 +166,14 @@ const BulkUploadModal: React.FC<BulkUploadModalProps> = ({ isOpen, onClose, onUp
         className="fixed inset-0 dark:bg-black/90 bg-white/90 z-50 p-4 overflow-y-auto"
         onClick={onClose}
       >
-        <div className="relative w-full min-h-full flex items-center justify-center py-6">
-          <CardSpotlight>
+        <div className="relative w-full min-h-full flex items-center dark:border-white-800/10 justify-center py-6">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
               transition={{ type: "spring", damping: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-transparent relative w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-5xl"
+              className="relative w-full max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-5xl bg-white border border-gray-300 shadow-xl rounded-2xl dark:bg-[#181A20] dark:border-gray-700/60"
             >
               {/* Header */}
               <div className="p-4 sm:p-6 border-b border-gray-200 dark:border-gray-800/10">
@@ -379,7 +378,6 @@ const BulkUploadModal: React.FC<BulkUploadModalProps> = ({ isOpen, onClose, onUp
                 </div>
               </div>
             </motion.div>
-          </CardSpotlight>
         </div>
       </motion.div>
     </AnimatePresence>

@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { useAuth } from "@/context/authContext";
 import TransactionsLog from "./TransactionsLog"; // Assuming TransactionsLog is defined elsewhere
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 interface PaymentsSidebarProps {
     onConfigurePayments: () => void;
@@ -25,9 +26,15 @@ const PaymentSidebar: React.FC<PaymentsSidebarProps> = ({
     const [open, setOpen] = useState(true);
 
     return (
-        <>
+        <div
+      className={cn(
+        "z-20 bg-gray-100 md:flex-row dark:border-neutral-700 dark:bg-neutral-800",
+         // for your use case, use `h-screen` instead of `h-[60vh]`
+      )}
+    >
+
             <Sidebar open={open} setOpen={setOpen}>
-                <SidebarBody className={`justify-between gap-10 ${open ? '' : 'items-center px-2'}`}>
+                <SidebarBody className={`justify-between bg-black-500 gap-10 ${open ? '' : 'items-center px-2'}`}>
                     <div className={`flex flex-1 flex-col overflow-y-auto ${open ? '' : 'items-center'} ${open ? '' : 'w-[60px] min-w-[60px] max-w-[60px]'}`}>
                         {open ? <Logo /> : <LogoIcon />}
 
@@ -115,7 +122,7 @@ const PaymentSidebar: React.FC<PaymentsSidebarProps> = ({
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 }
 
