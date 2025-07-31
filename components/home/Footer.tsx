@@ -17,7 +17,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative bg-black text-white h-screen flex items-center justify-center overflow-hidden">
+    <footer className="sticky bottom-0 bg-black text-white h-screen flex items-center justify-center ">
       <BackgroundBeams className="absolute top-0 left-0 w-full h-full z-0" />
       <div className="relative z-10 text-center">
         <motion.h1
