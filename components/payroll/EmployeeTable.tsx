@@ -363,8 +363,8 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
                             )}
                         </div>
 
-                        <div className="px-3 py-2 bg-gray-100 dark:bg-transparent rounded-md border border-gray-400 dark:border-gray-600 flex-shrink-0">
-                            <span className="text-indigo-600 dark:text-indigo-300 font-bold text-sm">1 USD = {exchangeRate.toFixed(6)} {selectedTokenSymbol}</span>
+                        <div className="px-3 py-2 bg-gray-100 dark:bg-transparent rounded-md border border-gray-400 dark:border-gray-400 flex-shrink-0">
+                            <span className="text-indigo-600 dark:text-indigo-700 font-bold text-sm">1 USD = {exchangeRate.toFixed(6)} {selectedTokenSymbol}</span>
                         </div>
 
                         <button
@@ -375,12 +375,12 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
                             title={selectedEmployees.length === 0 ? "Select employees to export" : `Export ${selectedEmployees.length} selected employee(s)`}
                             disabled={selectedEmployees.length === 0 || isLoading || isLoadingDerived}
                         >
-                            <Download className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                            <Download className="w-4 h-4 text-black-600 dark:text-black-400" />
                             <span>Export</span>
                         </button>
 
                         <div className="px-3 py-2 bg-gray-100 dark:bg-transparent rounded-md border border-gray-400 dark:border-gray-600 flex-shrink-0">
-                            <span className="text-black dark:text-white text-sm">
+                            <span className="text-black dark:text-black text-sm">
                                 {selectedEmployees.length} / {employees.length}
                             </span>
                         </div>
@@ -388,7 +388,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
 
                     <div className="lg:hidden flex items-center gap-3 w-full justify-end">
                         <div className="px-3 py-2 bg-gray-100 dark:bg-gray-800 rounded-md border border-gray-400 dark:border-gray-600 flex-shrink-0">
-                            <span className="text-black dark:text-white text-sm">
+                            <span className="text-black dark:text-black text-sm">
                                 {selectedEmployees.length} / {employees.length}
                             </span>
                         </div>
