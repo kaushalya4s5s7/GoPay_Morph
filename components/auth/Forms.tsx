@@ -73,8 +73,10 @@ const LoginForm: React.FC<LoginFormProps> = ({
     }
     return (
         <div className="relative w-full max-w-xl mx-auto rounded-2xl bg-gradient-to-br from-black/60 via-black-100/40 to-white/10 dark:from-zinc-900/60 dark:via-zinc-800/40 dark:to-zinc-900/10 backdrop-blur-xl border border-white/30 dark:border-zinc-700/40 shadow-xl p-6 sm:p-10">
-            <h2 className="text-xl sm:text-3xl font-bold text-neutral-800 dark:text-neutral-200">{heading}</h2>
-            <p className="mt-2 max-w-sm text-sm sm:text-lg text-neutral-600 dark:text-neutral-300">{subheading}</p>
+            <div className="flex flex-col items-center mb-4">
+                <img src="/GoPay-removebg-preview.png" alt="GoPay Logo" className="h-14 sm:h-20 w-auto mb-2" />
+                <h2 className="text-xl sm:text-3xl font-bold text-neutral-800 dark:text-neutral-200">{heading}</h2>
+            </div>
             <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
                 {apiError && <p className="mb-4 text-sm sm:text-lg text-red-600 dark:text-red-400">{apiError}</p>}
                 {successMessage && <p className="mb-4 text-sm sm:text-lg text-green-600 dark:text-green-400">{successMessage}</p>}
@@ -138,8 +140,10 @@ const RegisterForm: React.FC<RegisterFormProps> = ({
     }
     return (
         <div className="relative w-full max-w-xl mx-auto rounded-2xl bg-gradient-to-br from-white/60 via-neutral-100/40 to-white/10 dark:from-zinc-900/60 dark:via-zinc-800/40 dark:to-zinc-900/10 backdrop-blur-xl border border-white/30 dark:border-zinc-700/40 shadow-xl p-6 sm:p-10">
-            <h2 className="text-xl sm:text-3xl font-bold text-neutral-800 dark:text-neutral-200">{heading}</h2>
-            <p className="mt-2 max-w-sm text-sm sm:text-xl text-neutral-600 dark:text-neutral-300">{subheading}</p>
+            <div className="flex flex-col items-center mb-4">
+                <img src="/GoPay-removebg-preview.png" alt="GoPay Logo" className="h-14 sm:h-20 w-auto mb-2" />
+                <h2 className="text-xl sm:text-3xl font-bold text-neutral-800 dark:text-neutral-200">{heading}</h2>
+            </div>
             <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
                 {apiError && <p className="mb-4 text-sm sm:text-lg text-red-600 dark:text-red-400">{apiError}</p>}
                 {successMessage && <p className="mb-4 text-sm sm:text-lg text-green-600 dark:text-green-400">{successMessage}</p>}
@@ -196,8 +200,10 @@ const ForgotPasswordForm: React.FC<ForgotPasswordFormProps> = ({ formMethods, on
     const { register, handleSubmit, formState: { errors } } = formMethods;
     return (
         <div className="relative w-full max-w-xl mx-auto rounded-2xl bg-gradient-to-br from-white/60 via-neutral-100/40 to-white/10 dark:from-zinc-900/60 dark:via-zinc-800/40 dark:to-zinc-900/10 backdrop-blur-xl border border-white/30 dark:border-zinc-700/40 shadow-xl p-6 sm:p-10">
-            <h2 className="text-xl sm:text-2xl font-bold text-neutral-800 dark:text-neutral-200">Forgot Password</h2>
-            <p className="mt-2 max-w-sm text-sm sm:text-lg text-neutral-600 dark:text-neutral-300">Enter your email address and we'll send you an OTP to reset your password.</p>
+            <div className="flex flex-col items-center mb-4">
+                <img src="/GoPay-removebg-preview.png" alt="GoPay Logo" className="h-14 sm:h-20 w-auto mb-2" />
+                <h2 className="text-xl sm:text-2xl font-bold text-neutral-800 dark:text-neutral-200">Forgot Password</h2>
+            </div>
             <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
                 {apiError && <p className="mb-4 text-sm sm:text-lg text-red-600 dark:text-red-400">{apiError}</p>}
                 {successMessage && <p className="mb-4 text-sm sm:text-lg text-green-600 dark:text-green-400">{successMessage}</p>}
@@ -233,8 +239,10 @@ const ResetPasswordForm: React.FC<ResetPasswordFormProps> = ({ formMethods, onSu
     const { register, handleSubmit, formState: { errors }, getValues } = formMethods;
     return (
         <div className="relative w-full max-w-xl mx-auto rounded-2xl bg-gradient-to-br from-white/60 via-neutral-100/40 to-white/10 dark:from-zinc-900/60 dark:via-zinc-800/40 dark:to-zinc-900/10 backdrop-blur-xl border border-white/30 dark:border-zinc-700/40 shadow-xl p-6 sm:p-10">
-            <h2 className="text-xl sm:text-2xl font-bold text-neutral-800 dark:text-neutral-200">Reset Your Password</h2>
-            <p className="mt-2 max-w-sm text-sm sm:text-lg text-neutral-600 dark:text-neutral-300">Enter the OTP sent to {userEmailForOtp || 'your email'} and set a new password.</p>
+            <div className="flex flex-col items-center mb-4">
+                <img src="/GoPay-removebg-preview.png" alt="GoPay Logo" className="h-14 sm:h-20 w-auto mb-2" />
+                <h2 className="text-xl sm:text-2xl font-bold text-neutral-800 dark:text-neutral-200">Reset Your Password</h2>
+            </div>
             <form className="my-8" onSubmit={handleSubmit(onSubmit)}>
                 {apiError && <p className="mb-4 text-sm sm:text-lg text-red-600 dark:text-red-400">{apiError}</p>}
                 {successMessage && <p className="mb-4 text-sm sm:text-lg text-green-600 dark:text-green-400">{successMessage}</p>}
