@@ -6,6 +6,7 @@ import Horizon from '@/components/home/horizon'; // Assuming Horizon is defined 
 import Footer from '@/components/home/Footer';
 import FullViewport from '@/components/home/FullViewport';
 import { cn } from '@/lib/utils';
+import Features from '@/components/home/Features';
 
 // Define props for HomePage
 
@@ -20,6 +21,7 @@ function HomePage() { // Accept the prop
     const sections = [
                         { id: "Hero", component:<Hero/>, label: "Hero" }, // Assuming Hero is defined elsewhere
 
+                        {id:"Features", component: <Features />, label: "Features" }, // Assuming Features is defined elsewhere
                         { id: "horizon", component: <Horizon />, label: "Horizon" }, // Assuming Horizon is defined elsewhere
 
 { id: "features1", component: <FullViewport />, label: "Features" }, // Assuming Features is defined elsewhere
