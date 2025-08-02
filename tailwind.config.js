@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'ibm-plex-mono': ['var(--font-ibm-plex-mono)', 'monospace'],
+      },
     },
   },
   darkMode: "class",
