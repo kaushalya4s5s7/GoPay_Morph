@@ -206,41 +206,41 @@ const AuthPage: React.FC = () => {
                 <link rel="preload" href="/auth.mp4" as="video" type="video/mp4" />
                 <title>Authentication</title>
             </Head>
-            {/* Wrap only the search params component in Suspense */}
             <Suspense fallback={null}>
                 <SearchParamsProvider onModeChange={setMode} />
             </Suspense>
-            {/* Grid background behind the form - demo style for visibility */}
-            <div className="absolute inset-0 z-1"
-     style={{
-       background: "linear-gradient(135deg, rgba(26, 42, 108, 0.6) 0%, rgba(178, 31, 31, 0.5) 50%, rgba(253, 187, 45, 0.4) 100%)",
-     }}
-/>
-            <div
-                className={
-                    cn(
-                        "absolute inset-1",
-                        "[background-size:40px_40px]",
-                        "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
-                        "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
-                    )
-                }
-            />
-            <div/>
-            {/* Radial gradient mask overlay for faded effect */}
-            <div className="pointer-events-none z-2 absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black -z-10"></div>
+            {/* Full-page background layers */}
+            <div className="fixed inset-0 z-0">
+                <div
+                    className="absolute inset-0"
+                    style={{
+                        background: "linear-gradient(135deg, rgba(26, 42, 108, 0.6) 0%, rgba(178, 31, 31, 0.5) 50%, rgba(253, 187, 45, 0.4) 100%)"
+                    }}
+                />
+                <div
+                    className={
+                        cn(
+                            "absolute inset-0",
+                            "[background-size:40px_40px]",
+                            "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
+                            "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
+                        )
+                    }
+                />
+                <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black" style={{zIndex:2}} />
+            </div>
             <div className="absolute z-50 top-4 right-4">
                 <Link href="/">
                     <Home className="text-black dark:hover:text-gray-200 hover:text-gray-800 dark:text-white" size={30} />
                 </Link>
             </div>
-            <div className="flex items-center justify-center  min-h-screen bg-black dark:bg-black">
+            <main className="relative min-h-screen flex items-center justify-center z-10">
                 <div className="flex relative items-center justify-center p-4 w-full">
                     <div className="relative z-100 w-full max-w-xl rounded-lg">
                         {renderFormContent()}
                     </div>
                 </div>
-            </div>
+            </main>
         </>
     );
 };

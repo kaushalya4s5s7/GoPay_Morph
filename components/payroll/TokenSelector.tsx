@@ -19,7 +19,7 @@ interface TokenSelectorProps {
     onExchangeRateChange: (rate: number) => void;
 }
 
-const MORPH_CHAIN_ID = 2810;
+const Lisk_CHAIN_ID = 4202;
 
 const TokenSelector = ({
     tokens,
@@ -36,10 +36,10 @@ const TokenSelector = ({
     const [fallbackBalance, setFallbackBalance] = useState<string | null>(null);
     const [fallbackError, setFallbackError] = useState<Error | null>(null);
 
-    // Check if we're on morph chain
-    const isMorphChain = chainId === MORPH_CHAIN_ID;
+    // Check if we're on Lisk chain
+    const isLiskChain = chainId === Lisk_CHAIN_ID;
 
-    // Only enable wagmi hook if NOT on morph chain
+    // Only enable wagmi hook if NOT on Lisk chain
     const {
         data: balance,
         isLoading: isBalanceLoading,
@@ -52,8 +52,8 @@ const TokenSelector = ({
             : (selectedToken?.address as `0x${string}`),
         chainId: chainId,
         query: {
-            // Disable the hook for morph chain
-            enabled: isConnected && !!selectedToken && !!address && !isMorphChain,
+            // Disable the hook for Lisk chain
+            enabled: isConnected && !!selectedToken && !!address && !isLiskChain,
             retry: 3,
             retryDelay: 1000
         }
@@ -91,9 +91,9 @@ const TokenSelector = ({
             ? parseFloat(fallbackBalance).toFixed(4)
             : '0';
 
-    // For morph chain, fetch directly with ethers whenever relevant dependencies change
+    // For Lisk chain, fetch directly with ethers whenever relevant dependencies change
     useEffect(() => {
-        if (isMorphChain && isConnected && address && selectedToken && !fallbackBalance && !isFallbackLoading) {
+        if (isLiskChain && isConnected && address && selectedToken && !fallbackBalance && !isFallbackLoading) {
             setIsFallbackLoading(true);
             setFallbackError(null);
 
@@ -103,17 +103,17 @@ const TokenSelector = ({
                 })
                 .catch(err => {
                     setFallbackError(err as Error);
-                    console.error("Error fetching Morph chain balance:", err);
+                    console.error("Error fetching Lisk chain balance:", err);
                 })
                 .finally(() => {
                     setIsFallbackLoading(false);
                 });
         }
-    }, [isMorphChain, isConnected, address, selectedToken, fetchBalanceWithEthers, fallbackBalance, isFallbackLoading]);
+    }, [isLiskChain, isConnected, address, selectedToken, fetchBalanceWithEthers, fallbackBalance, isFallbackLoading]);
 
-    // Effect for non-morph chains when wagmi hook fails
+    // Effect for non-Lisk chains when wagmi hook fails
     useEffect(() => {
-        if (!isMorphChain && balanceError && !fallbackBalance && !isFallbackLoading) {
+        if (!isLiskChain && balanceError && !fallbackBalance && !isFallbackLoading) {
             setIsFallbackLoading(true);
             setFallbackError(null);
 
@@ -128,7 +128,7 @@ const TokenSelector = ({
                     setIsFallbackLoading(false);
                 });
         }
-    }, [isMorphChain, balanceError, fetchBalanceWithEthers, fallbackBalance, isFallbackLoading]);
+    }, [isLiskChain, balanceError, fetchBalanceWithEthers, fallbackBalance, isFallbackLoading]);
 
     // Reset fallback data when token changes
     useEffect(() => {
@@ -164,8 +164,8 @@ const TokenSelector = ({
         setFallbackBalance(null);
         setFallbackError(null);
 
-        if (isMorphChain) {
-            // For morph, directly trigger ethers fetch by resetting state
+        if (isLiskChain) {
+            // For Lisk, directly trigger ethers fetch by resetting state
             setIsFallbackLoading(true);
             fetchBalanceWithEthers()
                 .then(result => {
@@ -183,18 +183,18 @@ const TokenSelector = ({
         }
     };
 
-    // Effect to fetch balance when token/chain changes (for non-morph chains)
+    // Effect to fetch balance when token/chain changes (for non-Lisk chains)
     useEffect(() => {
-        if (isConnected && selectedToken && address && !isMorphChain) {
+        if (isConnected && selectedToken && address && !isLiskChain) {
             refetchBalance();
         }
-    }, [selectedToken?.address, refetchBalance, isConnected, address, isMorphChain]);
+    }, [selectedToken?.address, refetchBalance, isConnected, address, isLiskChain]);
 
     // Determine loading state based on active fetch method
-    const isAnyBalanceLoading = (isMorphChain ? isFallbackLoading : (isBalanceLoading || isFallbackLoading));
+    const isAnyBalanceLoading = (isLiskChain ? isFallbackLoading : (isBalanceLoading || isFallbackLoading));
 
-    // Error state - for morph we only check fallback error, for others we check both
-    const hasRealBalanceError = isMorphChain ? fallbackError : (balanceError && fallbackError);
+    // Error state - for Lisk we only check fallback error, for others we check both
+    const hasRealBalanceError = isLiskChain ? fallbackError : (balanceError && fallbackError);
 
     if (!isConnected) {
         return (

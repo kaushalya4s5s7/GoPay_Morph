@@ -24,6 +24,7 @@ export function FeaturesSectionDemo() {
         "It's as easy as using an Apple, and as expensive as buying one.",
       icon: <IconEaseInOut />,
     },
+    
     {
       title: "Pricing like no other",
       description:

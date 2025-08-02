@@ -128,7 +128,7 @@ const EmployeeDetailsModal: React.FC<EmployeeDetailsModalProps> = ({ isOpen, onC
     visible: {
       y: 0,
       opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 24 }
+      transition: { type: "spring" as const, stiffness: 300, damping: 24 }
     },
     exit: {
       y: -20, opacity: 0,
@@ -140,11 +140,11 @@ const EmployeeDetailsModal: React.FC<EmployeeDetailsModalProps> = ({ isOpen, onC
     hidden: { x: -20, opacity: 0 },
     visible: {
       x: 0, opacity: 1,
-      transition: { type: "spring", stiffness: 300, damping: 24 }
+      transition: { type: "spring" as const, stiffness: 300, damping: 24 }
     },
     hover: {
       scale: 1.02,
-      transition: { type: "spring", stiffness: 400, damping: 10 }
+      transition: { type: "spring" as const, stiffness: 400, damping: 10 }
     }
   };
 
