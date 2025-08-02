@@ -139,7 +139,7 @@ export default function Hero() {
               <div className="absolute inset-0 flex flex-col mt-5 items-center justify-center z-40 pointer-events-none">
                 <div className="text-center space-y-2">
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-black text-white leading-[0.85] tracking-tight drop-shadow-2xl">
-                    Decentralize{' '}
+                    Decentralized{' '}
                     <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent text-glow">
                       Payroll
                     </span>
