@@ -212,10 +212,7 @@ const AuthPage: React.FC = () => {
             {/* Full-page background layers */}
             <div className="fixed inset-0 z-0">
                 <div
-                    className="absolute inset-0"
-                    style={{
-                        background: "linear-gradient(135deg, rgba(26, 42, 108, 0.6) 0%, rgba(178, 31, 31, 0.5) 50%, rgba(253, 187, 45, 0.4) 100%)"
-                    }}
+                    className="absolute inset-0 bg-white dark:bg-black"
                 />
                 <div
                     className={
