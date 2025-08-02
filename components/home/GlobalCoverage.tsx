@@ -30,14 +30,16 @@ export default function GlobalCoverage() {
         <div className="relative bg-gray-400 rounded-2xl p-8 lg:p-16">
           <div className="relative w-full h-96 bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl overflow-hidden">
             {/* World map video placeholder */}
-            <video
-              src="/Global_Money_Transfer_Animation_Scene.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover opacity-80"
-            />
+          <video
+  src="/Global_Money_Transfer_Animation_Scene.mp4"
+  autoPlay
+  loop
+  muted
+  playsInline
+  preload="auto" // <-- important for faster start
+  className="w-full h-full object-cover opacity-80"
+/>
+
             
             {/* Interactive regions */}
             {regions.map((region, index) => (
