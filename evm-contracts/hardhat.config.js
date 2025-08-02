@@ -1,18 +1,23 @@
 require("@nomicfoundation/hardhat-toolbox");
 require("dotenv").config();
 
-const PRIVATE_KEY = process.env.PRIVATE_KEY ;
+// Ensure your .env file has the PRIVATE_KEY variable set
+const PRIVATE_KEY = 0x47C20dD1a64F91c0A3590f98266DEABE3536b0A4;
+
+if (!PRIVATE_KEY) {
+  console.error("Please set your PRIVATE_KEY in a .env file");
+  process.exit(1);
+}
 
 module.exports = {
-  solidity: "0.8.27",
+  solidity: "0.8.23",
   networks: {
-    morphHolesky: {
-  url: "https://rpc-quicknode-holesky.morphl2.io",
-  chainId: 2810,
-  accounts: [process.env.PRIVATE_KEY], // Your wallet's private key
-},
-    
-   
-    
-  }
+    // for testnet
+    'lisk-sepolia': {
+      url: 'https://rpc.sepolia-api.lisk.com',
+      accounts: [PRIVATE_KEY ],
+      gasPrice: 1000000000,
+    },
+  },
+
 };
