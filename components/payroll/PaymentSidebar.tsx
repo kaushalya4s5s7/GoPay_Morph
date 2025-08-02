@@ -23,7 +23,7 @@ const PaymentSidebar: React.FC<PaymentsSidebarProps> = ({
     const [showLogs, setShowLogs] = useState(false); // You might need to implement the logs modal
     const { user,logout } = useAuth();
     const [showLogoutModal, setShowLogoutModal] = useState(false);
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     return (
         <div

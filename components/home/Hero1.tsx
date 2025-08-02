@@ -151,7 +151,6 @@ export default function Hero() {
               </div>
             </div>
           </div>
-          <h1></h1>
 
           {/* Bottom Content Section */}
           
