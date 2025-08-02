@@ -598,21 +598,9 @@ const PaymentsPage: React.FC = () => {
     const hasTransactionActivity = isLoadingDerived || isTxSuccess || isTxErrorStatus || !!txError || !!approvalTxHash || !!txHash;
 
     return (
-        <div className="flex h-screen w-screen relative">
+        <div className="flex h-screen w-screen relative bg-black">
             {/* Background Video */}
-            <div className="absolute inset-0 w-full h-full z-0 pointer-events-none">
-                <video
-                    className="w-full h-full object-cover"
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    poster="/4954793_Coll_halloween_Realistic_6144x3456.mp4"
-                >
-                    <source src="/4954793_Coll_halloween_Realistic_6144x3456.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                </video>
-            </div>
+           
             <PaymentsSidebar
                 onConfigurePayments={() => setShowConfigurePayModal(true)}
                 onAddEmployee={handleAddEmployeeClick}

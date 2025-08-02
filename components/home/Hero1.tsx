@@ -91,14 +91,14 @@ export default function Hero() {
         </div>
 
         {/* Content Container */}
-        <div className="relative z-20 w-full max-w-7xl mx-auto px-4 md:px-6 py-6 flex flex-col justify-center min-h-screen">
+        <div className="relative z-20 w-full max-w-12xl mx-auto px-4 md:px-6 py-9 w-screen h-screen">
           
           {/* Top Content Section */}
          
 
           {/* Globe Section with Overlaid Text */}
-          <div className="relative z-30 flex justify-center mb-4">
-            <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 xl:w-[26rem] xl:h-[26rem] 2xl:w-[28rem] 2xl:h-[28rem] mx-auto">
+          <div className="relative z-30 flex justify-center mb-12">
+            <div className="relative w-90 h-90 sm:w-96 sm:h-96 md:w-[28rem] md:h-[28rem] lg:w-[36rem] lg:h-[36rem] xl:w-[44rem] xl:h-[44rem] 2xl:w-[52rem] 2xl:h-[52rem] mx-auto">
               {/* Enhanced glow effect around globe */}
               
               {/* Globe wrapper */}
@@ -136,28 +136,22 @@ export default function Hero() {
               </div>
               
               {/* Main Headlines Overlaid on Globe */}
-              <div className="absolute inset-0 flex flex-col mt-4 items-center justify-center z-40 pointer-events-none">
-                <div className="text-center space-y-1">
-                  <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-black text-white leading-[0.85] tracking-tight drop-shadow-2xl">
+              <div className="absolute inset-0 flex flex-col mt-5 items-center justify-center z-40 pointer-events-none">
+                <div className="text-center space-y-2">
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-black text-white leading-[0.85] tracking-tight drop-shadow-2xl">
                     Decentralize{' '}
                     <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-500 bg-clip-text text-transparent text-glow">
                       Payroll
                     </span>
                   </h1>
-                  <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-black text-white leading-[0.85] tracking-tight drop-shadow-2xl">
+                  <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-black text-white leading-[0.85] tracking-tight drop-shadow-2xl">
                     Protocol
                   </h2>
                 </div>
               </div>
             </div>
           </div>
-          
-          {/* Single line below globe */}
-          <div className="text-center mb-4">
-            <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-black text-white leading-[0.85] tracking-tight drop-shadow-2xl">
-              Transforming Global Payroll
-            </h1>
-          </div>
+          <h1></h1>
 
           {/* Bottom Content Section */}
           
@@ -167,6 +161,5 @@ export default function Hero() {
     </>
   );
 }
-
 
 
