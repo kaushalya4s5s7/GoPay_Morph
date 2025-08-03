@@ -547,7 +547,7 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({
                         {paginatedEmployees.map((employee, index) => (
                             <tr
                                 key={employee.wallet || index}
-                                className={`hover:bg-gray-100 transition-colors ${selectedEmployees.includes(employee.wallet) ? 'bg-indigo-50' : ''}`}
+                                className={`hover:bg-gray-800/50 transition-colors ${selectedEmployees.includes(employee.wallet) ? 'bg-indigo-900/30' : ''}`}
                             >
                                 <td className="px-2 sm:px-4 py-3">
                                     <input
