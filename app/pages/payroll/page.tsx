@@ -607,10 +607,10 @@ const PaymentsPage: React.FC = () => {
                 onBulkUpload={handleBulkUploadClick}
             />
 
-            <main className="flex-1 flex flex-col p-6 overflow-y-auto relative dark:text-white text-black">
+            <main className="flex-1 flex flex-col p-6 overflow-y-auto relative text-white">
                 <div className="absolute top-4 right-4 z-20">
                     <Link href="/">
-                        <Home className="text-black dark:hover:text-gray-200 hover:text-gray-800 dark:text-white" size={30} />
+                        <Home className="text-white hover:text-gray-200" size={30} />
                     </Link>
                 </div>
                 
@@ -690,10 +690,10 @@ const PaymentsPage: React.FC = () => {
             />
 
             {isDeleteDialogOpen && (
-                <div className="fixed inset-0 z-50 overflow-y-auto dark:bg-black dark:text-white text-black backdrop-blur-sm flex items-center justify-center">
-                    <div className="dark:bg-[#1A1F2E] rounded-lg p-6 w-full max-w-md mx-4 shadow-xl border border-gray-700 animate-fade-in">
-                        <h3 className="text-xl font-medium dark:text-white mb-4">Confirm Deletion</h3>
-                        <p className="dark:text-gray-300 mb-6">
+                <div className="fixed inset-0 z-50 overflow-y-auto bg-black text-white backdrop-blur-sm flex items-center justify-center">
+                    <div className="bg-[#1A1F2E] rounded-lg p-6 w-full max-w-md mx-4 shadow-xl border border-gray-700 animate-fade-in">
+                        <h3 className="text-xl font-medium text-white mb-4">Confirm Deletion</h3>
+                        <p className="text-gray-300 mb-6">
                             Are you sure you want to delete this employee? This action cannot be undone.
                         </p>
                         <div className="flex justify-end space-x-3">

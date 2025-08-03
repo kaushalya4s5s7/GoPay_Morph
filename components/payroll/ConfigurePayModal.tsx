@@ -259,7 +259,7 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 dark:bg-black/90 bg-white/90 z-50 p-4 overflow-y-auto"
+          className="fixed inset-0 bg-black/90 z-50 p-4 overflow-y-auto"
           onClick={onClose}
         >
           <div className="relative w-full min-h-full flex items-center justify-center py-6">
@@ -271,13 +271,13 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                 onClick={(e) => e.stopPropagation()}
                 className="bg-black relative w-full max-w-md sm:max-w-lg md:max-w-lg"
               >
-                <div className="border-b border-gray-200 dark:border-gray-800/10">
+                <div className="border-b border-gray-800/10">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center space-x-2 sm:space-x-3">
-                      <div className="p-2 sm:p-2.5 rounded-full bg-gray-100 dark:bg-gray-800/20 shadow-inner shadow-gray-200/50 dark:shadow-gray-700/10">
-                        <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 dark:text-gray-300" />
+                      <div className="p-2 sm:p-2.5 rounded-full bg-gray-800/20 shadow-inner shadow-gray-700/10">
+                        <DollarSign className="w-5 h-5 sm:w-6 sm:h-6 text-gray-300" />
                       </div>
-                      <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-black/70 dark:text-white tracking-tight">
+                      <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-white tracking-tight">
                         Configure Payments
                       </h2>
                     </div>
@@ -286,7 +286,7 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                       whileTap={{ scale: 0.9 }}
                       onClick={onClose}
                       // Updated close button styles
-                      className="text-gray-500 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200 transition-colors p-1 sm:p-1.5 rounded-full hover:bg-gray-100 dark:hover:bg-white/5"
+                      className="text-gray-400 hover:text-gray-200 transition-colors p-1 sm:p-1.5 rounded-full hover:bg-gray-800/50"
                       aria-label="Close modal"
                       disabled={isCalculating}
                     >
@@ -294,13 +294,13 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                     </motion.button>
                   </div>
                 </div>
-                <div className="p-4 sm:p-5 rounded-xl bg-white/50 dark:bg-gray-900/20 backdrop-blur-sm">
+                <div className="p-4 sm:p-5 rounded-xl bg-gray-900/20 backdrop-blur-sm">
                   <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-3">
-                    <div className="p-1.5 sm:p-2 rounded-full bg-purple-100 dark:bg-purple-900/10">
-                    <Wallet className="w-4 h-4 sm:w-5 sm:h-5 text-purple-600 dark:text-purple-300" />
+                    <div className="p-1.5 sm:p-2 rounded-full bg-purple-900/10">
+                    <Wallet className="w-4 h-4 sm:w-5 sm:h-5 text-purple-300" />
                     </div>
-                    <span className="font-semibold text-sm sm:text-base text-black dark:text-white">Wallet Connection</span>
+                    <span className="font-semibold text-sm sm:text-base text-white">Wallet Connection</span>
                   </div>
                   </div>
                   
@@ -328,7 +328,7 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={openConnectModal}
-                          className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 dark:from-purple-500 dark:to-blue-500 dark:hover:from-purple-600 dark:hover:to-blue-600 text-white font-medium shadow-lg shadow-purple-500/20 dark:shadow-purple-800/20 transition-all"
+                          className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-purple-500 to-blue-500 hover:from-purple-600 hover:to-blue-600 text-white font-medium shadow-lg shadow-purple-800/20 transition-all"
                         >
                           Connect Wallet
                         </motion.button>
@@ -341,7 +341,7 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={openChainModal}
-                          className="flex-1 py-2.5 px-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-all flex items-center justify-center gap-2"
+                          className="flex-1 py-2.5 px-4 rounded-xl border border-gray-700 bg-gray-800 text-gray-200 text-sm font-medium hover:bg-gray-700 transition-all flex items-center justify-center gap-2"
                         >
                           {chain.hasIcon && (
                           <div className="w-5 h-5 overflow-hidden rounded-full">
@@ -361,7 +361,7 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                           whileHover={{ scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
                           onClick={openAccountModal}
-                          className="flex-1 py-2.5 px-4 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-700 transition-all flex items-center justify-center gap-2"
+                          className="flex-1 py-2.5 px-4 rounded-xl border border-gray-700 bg-gray-800 text-gray-200 text-sm font-medium hover:bg-gray-700 transition-all flex items-center justify-center gap-2"
                         >
                           <div className="w-5 h-5 rounded-full bg-gradient-to-r from-purple-500 to-blue-500"></div>
                           <span>{account.displayName}</span>
@@ -377,17 +377,17 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
 
                 <div className="space-y-4 sm:space-y-5">
                   {/* Token Selection - Updated styles */}
-                  <div className="p-4 sm:p-5 rounded-xl border border-gray-200 dark:border-gray-800/60 bg-white/50 dark:bg-gray-900/20 backdrop-blur-sm">
+                  <div className="p-4 sm:p-5 rounded-xl border border-gray-800/60 bg-gray-900/20 backdrop-blur-sm">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 sm:mb-5">
                       <div className="flex items-center gap-3">
-                        <div className="p-1.5 sm:p-2 rounded-full bg-blue-100 dark:bg-blue-900/10">
-                          <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-300" />
+                        <div className="p-1.5 sm:p-2 rounded-full bg-blue-900/10">
+                          <DollarSign className="w-4 h-4 sm:w-5 sm:h-5 text-blue-300" />
                         </div>
-                        <span className="font-semibold text-sm sm:text-base text-black dark:text-white">Payment Token</span>
+                        <span className="font-semibold text-sm sm:text-base text-white">Payment Token</span>
                       </div>
-                      <div className="flex items-center px-2.5 py-1 rounded-full bg-blue-100 dark:bg-blue-900/10 border border-blue-200 dark:border-blue-700/20">
-                        <RefreshCw className={`w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1.5 ${isCalculating ? 'animate-spin text-blue-600 dark:text-blue-300' : 'text-blue-500 dark:text-blue-400'}`} />
-                        <span className="text-xs text-blue-800 dark:text-blue-200">Auto-updates every 30s</span>
+                      <div className="flex items-center px-2.5 py-1 rounded-full bg-blue-900/10 border border-blue-700/20">
+                        <RefreshCw className={`w-3 h-3 sm:w-3.5 sm:h-3.5 mr-1.5 ${isCalculating ? 'animate-spin text-blue-300' : 'text-blue-400'}`} />
+                        <span className="text-xs text-blue-200">Auto-updates every 30s</span>
                       </div>
                     </div>
 
@@ -410,17 +410,17 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       // Style similar to upload status pending
-                      className="rounded-xl p-4 sm:p-5 border border-blue-300 dark:border-blue-700/20 bg-blue-50 dark:bg-blue-900/10 backdrop-blur-sm"
+                      className="rounded-xl p-4 sm:p-5 border border-blue-700/20 bg-blue-900/10 backdrop-blur-sm"
                     >
                       <div className="flex items-start space-x-3 sm:space-x-4">
-                        <div className="p-1.5 sm:p-2 rounded-full bg-blue-100 dark:bg-blue-900/10">
-                          <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600 dark:text-blue-300 animate-spin" />
+                        <div className="p-1.5 sm:p-2 rounded-full bg-blue-900/10">
+                          <RefreshCw className="w-4 h-4 sm:w-5 sm:h-5 text-blue-300 animate-spin" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-semibold text-sm sm:text-base text-blue-700 dark:text-blue-300">
+                          <h4 className="font-semibold text-sm sm:text-base text-blue-300">
                             Fetching Price Feed
                           </h4>
-                          <p className="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+                          <p className="mt-1 text-xs sm:text-sm text-gray-300">
                             Getting latest Chainlink rate for {selectedToken?.symbol}...
                           </p>
                         </div>
@@ -433,17 +433,17 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       // Style similar to upload status success
-                      className="rounded-xl p-4 sm:p-5 border border-green-300 dark:border-green-700/20 bg-green-50 dark:bg-green-900/10 backdrop-blur-sm"
+                      className="rounded-xl p-4 sm:p-5 border border-green-700/20 bg-green-900/10 backdrop-blur-sm"
                     >
                       <div className="flex items-start space-x-3 sm:space-x-4">
-                        <div className="p-1.5 sm:p-2 rounded-full bg-green-100 dark:bg-green-900/10">
-                          <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600 dark:text-green-300" />
+                        <div className="p-1.5 sm:p-2 rounded-full bg-green-900/10">
+                          <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-300" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-semibold text-sm sm:text-base text-green-700 dark:text-green-300">
+                          <h4 className="font-semibold text-sm sm:text-base text-green-300">
                             Rate Updated
                           </h4>
-                          <p className="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+                          <p className="mt-1 text-xs sm:text-sm text-gray-300">
                             1 USD = {exchangeRate.toFixed(6)} {selectedToken?.symbol}
                           </p>
                         </div>
@@ -456,17 +456,17 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
                       // Style similar to upload status error
-                      className="rounded-xl p-4 sm:p-5 border border-red-300 dark:border-red-400/20 bg-red-50 dark:bg-red-400/10 backdrop-blur-sm"
+                      className="rounded-xl p-4 sm:p-5 border border-red-400/20 bg-red-400/10 backdrop-blur-sm"
                     >
                       <div className="flex items-start space-x-3 sm:space-x-4">
-                        <div className="p-1.5 sm:p-2 rounded-full bg-red-100 dark:bg-red-400/10">
-                          <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 dark:text-red-400" />
+                        <div className="p-1.5 sm:p-2 rounded-full bg-red-400/10">
+                          <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-400" />
                         </div>
                         <div className="flex-1">
-                          <h4 className="font-semibold text-sm sm:text-base text-red-700 dark:text-red-400">
+                          <h4 className="font-semibold text-sm sm:text-base text-red-400">
                             Update Failed
                           </h4>
-                          <p className="mt-1 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+                          <p className="mt-1 text-xs sm:text-sm text-gray-300">
                             {error} Using estimated rate.
                           </p>
                         </div>
@@ -475,14 +475,14 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                   )}
 
                   {/* Info Block - Updated styles */}
-                  <div className="p-4 sm:p-5 rounded-lg border border-gray-200 dark:border-gray-700/20 bg-gray-50/50 dark:bg-gray-800/10 backdrop-blur-sm">
+                  <div className="p-4 sm:p-5 rounded-lg border border-gray-700/20 bg-gray-800/10 backdrop-blur-sm">
                     <div className="flex items-start gap-3 sm:gap-4">
-                      <div className="p-1.5 sm:p-2 rounded-full bg-gray-200 dark:bg-gray-800/30 mt-0.5 flex-shrink-0">
-                        <AlertCircle className="w-4 h-4 text-gray-600 dark:text-gray-300 flex-shrink-0" />
+                      <div className="p-1.5 sm:p-2 rounded-full bg-gray-800/30 mt-0.5 flex-shrink-0">
+                        <AlertCircle className="w-4 h-4 text-gray-300 flex-shrink-0" />
                       </div>
                       <div className="flex-1">
-                        <p className="text-black dark:text-white font-medium text-sm sm:text-base mb-1.5 sm:mb-2">About Exchange Rates</p>
-                        <p className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm leading-relaxed">
+                        <p className="text-white font-medium text-sm sm:text-base mb-1.5 sm:mb-2">About Exchange Rates</p>
+                        <p className="text-gray-400 text-xs sm:text-sm leading-relaxed">
                           Rates are fetched from Chainlink price feeds. Salaries are converted from USD to the selected token using this rate.
                         </p>
                       </div>
@@ -490,15 +490,15 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                   </div>
                 </div>
                 {/* Action Buttons - Updated styles */}
-                <div className="px-4 py-4 sm:px-6 sm:py-5 border-t border-gray-200 dark:border-gray-800/60 bg-gray-50/50 dark:bg-transparent backdrop-blur-sm">
+                <div className="px-4 py-4 sm:px-6 sm:py-5 border-t border-gray-800/60 bg-transparent backdrop-blur-sm">
                   <div className="flex flex-col-reverse sm:flex-row justify-center sm:justify-end gap-3 sm:gap-4">
                     <motion.button
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                       onClick={onClose}
                       // Style similar to BulkUpload Cancel button
-                      className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl border border-gray-300 dark:border-gray-700/80 bg-white dark:bg-gray-800/50 text-black dark:text-gray-300
-                    hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-black dark:hover:text-white hover:border-gray-400 dark:hover:border-gray-600 transition-all duration-200 backdrop-blur-sm text-sm sm:text-base"
+                      className="w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl border border-gray-700/80  text-gray-300
+                    hover:bg-gray-800 hover:text-white hover:border-gray-600 transition-all duration-200 backdrop-blur-sm text-sm sm:text-base"
                       disabled={isCalculating}
                     >
                       {isCalculating ? (
@@ -518,9 +518,9 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                         // Style similar to BulkUpload Upload button
                         className={`w-full sm:w-auto px-4 py-2.5 sm:px-6 sm:py-3 rounded-xl transition-all font-medium text-sm sm:text-base
                         ${isCalculating
-                            ? "bg-gradient-to-r from-gray-400/70 to-gray-500/70 dark:from-gray-600/40 dark:to-gray-700/40 text-white/70 cursor-not-allowed"
+                            ? "bg-gradient-to-r from-gray-600/40 to-gray-700/40 text-white/70 cursor-not-allowed"
                             // Use blue gradient for primary action
-                            : "bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 dark:from-blue-500 dark:to-blue-600 dark:hover:from-blue-600 dark:hover:to-blue-700 text-white shadow-lg shadow-blue-500/20 dark:shadow-blue-800/20 hover:shadow-blue-500/30 dark:hover:shadow-blue-800/30"
+                            : "bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white shadow-lg shadow-blue-800/20 hover:shadow-blue-800/30"
                           }`}
                       >
                         {isCalculating ? (
@@ -545,7 +545,7 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 dark:bg-black bg-white z-50 p-4 overflow-y-auto"
+          className="fixed inset-0 bg-black z-50 p-4 overflow-y-auto"
         >
           <div className="relative w-full min-h-full flex items-center justify-center py-6">
               <motion.div
@@ -556,12 +556,12 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
                 className="relative w-full max-w-md sm:max-w-lg md:max-w-xl p-6 sm:p-8 rounded-xl bg-transparent"
               >
                 <div className="flex flex-col items-center text-center space-y-6">
-                  <div className="p-3 rounded-full bg-blue-100 dark:bg-blue-900/20">
-                    <Wallet className="w-8 h-8 text-blue-600 dark:text-blue-300" />
+                  <div className="p-3 rounded-full bg-blue-900/20">
+                    <Wallet className="w-8 h-8 text-blue-300" />
                   </div>
                   
                   <div className="space-y-3">
-                    <h2 className="text-xl sm:text-2xl font-bold text-black dark:text-white tracking-tight">
+                    <h2 className="text-xl sm:text-2xl font-bold text-white tracking-tight">
                       Connect Your Wallet
                     </h2>
                     <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base max-w-sm mx-auto">

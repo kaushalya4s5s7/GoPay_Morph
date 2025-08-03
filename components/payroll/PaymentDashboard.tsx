@@ -142,7 +142,7 @@ const PaymentDashboard = ({
                         />
                     ) : (
                         <motion.div
-                            className="dark:bg-black rounded-lg p-12 border flex flex-col items-center justify-center space-y-6 text-center"
+                            className="bg-black rounded-lg p-12 border flex flex-col items-center justify-center space-y-6 text-center"
                             style={{ boxShadow: '0 4px 12px rgba(0, 0, 0, 0.3)' }}
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
@@ -152,8 +152,8 @@ const PaymentDashboard = ({
                                 <Wallet className="w-12 h-12 text-[#60DFCD]" />
                             </div>
                             <div className="space-y-2 max-w-md">
-                                <h2 className="text-xl font-bold">Connect Your Wallet</h2>
-                                <p className="text-[#486581]">
+                                <h2 className="text-xl font-bold text-white">Connect Your Wallet</h2>
+                                <p className="text-gray-400">
                                     Connect your wallet to start managing employee payments with cryptocurrency
                                 </p>
                             </div>
