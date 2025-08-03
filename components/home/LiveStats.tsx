@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { SpinningLogosDemo } from '@/components/home/SpinningLogos';
 
 type Counters = {
   payouts: number;
@@ -65,12 +66,42 @@ export default function LiveStats() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Card UI – same as before; no structural change needed */}
-          {/* ... */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 mb-2">
+          <div className="text-center">
+            <div className="text-4xl lg:text-5xl font-bold text-cyan-400 mb-2">
+              {formatNumber(counters.payouts)}
+            </div>
+            <div className="text-gray-300 text-lg">Total Payouts</div>
+          </div>
+          
+          <div className="text-center">
+            <div className="text-4xl lg:text-5xl font-bold text-cyan-400 mb-2">
+              {Math.floor(counters.countries)}+
+            </div>
+            <div className="text-gray-300 text-lg">Countries</div>
+          </div>
+          
+          <div className="text-center">
+            <div className="text-4xl lg:text-5xl font-bold text-cyan-400 mb-2">
+              {counters.compliance.toFixed(1)}%
+            </div>
+            <div className="text-gray-300 text-lg">Compliance Rate</div>
+          </div>
+          
+          <div className="text-center">
+            <div className="text-4xl lg:text-5xl font-bold text-cyan-400 mb-2">
+              {formatNumber(counters.customers)}+
+            </div>
+            <div className="text-gray-300 text-lg">Active Customers</div>
+          </div>
         </div>
 
-        <div className="text-center mt-16">
+        {/* Spinning Logos Section */}
+        <div className="flex justify-center mb-1">
+          <SpinningLogosDemo />
+        </div>
+
+        <div className="text-center mt-1">
           <div className="inline-flex items-center space-x-2 bg-white/10 px-6 py-3 rounded-full">
             <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />
             <span className="text-sm font-medium">Live data updating every minute</span>
