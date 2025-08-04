@@ -585,13 +585,13 @@ body {
 
 .grid-pattern {
   background-image: 
-    radial-gradient(circle at 1px 1px, rgba(158, 156, 156, 0.15) 1px, transparent 0);
+    radial-gradient(circle at 1px 1px, rgba(232, 230, 230, 0.649) 1px, transparent 0);
   background-size: 20px 20px;
 }
 
 .dot-pattern {
   background-image: 
-    radial-gradient(circle at 2px 2px, rgba(255,255,255,0.1) 2px, transparent 0);
+    radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.888) 2px, transparent 0);
   background-size: 24px 24px;
 }
 
