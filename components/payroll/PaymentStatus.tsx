@@ -47,7 +47,7 @@ const PaymentStatus = ({
 }: PaymentStatusProps) => {
     const [copySuccess, setCopySuccess] = useState(false);
 
-    // For ethers.js implementation (chain 4202)
+    // For ethers.js implementation (chain 2810)
     const [ethersTxStatus, setEthersTxStatus] = useState({
         isProcessing: false,
         isSuccess: false,
@@ -55,9 +55,9 @@ const PaymentStatus = ({
         error: '',
     });
 
-    // Check transaction status when using ethers and chain 4202
+    // Check transaction status when using ethers and chain 2810
     useEffect(() => {
-        if (chainId === 4202 && txHash) {
+        if (chainId === 2810 && txHash) {
             const checkTxStatus = async () => {
                 try {
                     if (!window.ethereum) {
@@ -115,9 +115,9 @@ const PaymentStatus = ({
         }
     }, [txHash, chainId]);
 
-    // Similarly for approval transaction when using chain 4202
+    // Similarly for approval transaction when using chain 2810
     useEffect(() => {
-        if (chainId === 4202 && approvalTxHash) {
+        if (chainId === 2810 && approvalTxHash) {
             const checkApprovalStatus = async () => {
                 try {
                     if (!window.ethereum) {
@@ -163,8 +163,8 @@ const PaymentStatus = ({
 
     // Auto-close after final state is reached
     useEffect(() => {
-        const isSuccess = chainId === 4202 ? ethersTxStatus.isSuccess : isTxSuccess;
-        const isError = chainId === 4202 ? ethersTxStatus.isError : isTxError;
+        const isSuccess = chainId === 2810 ? ethersTxStatus.isSuccess : isTxSuccess;
+        const isError = chainId === 2810 ? ethersTxStatus.isError : isTxError;
 
         // If we have a final state (success or error) and callback is provided
         if ((isSuccess || isError) && onAutoClose) {
@@ -177,13 +177,13 @@ const PaymentStatus = ({
     }, [chainId, ethersTxStatus.isSuccess, ethersTxStatus.isError, isTxSuccess, isTxError, onAutoClose]);
 
     // Determine processing state based on chain
-    const isProcessing = chainId === 4202
+    const isProcessing = chainId === 2810
         ? ethersTxStatus.isProcessing || isApproving
         : isWritePending || isTxLoading || isApproving;
 
     // Calculate status state based on chain
     const getStatusState = () => {
-        if (chainId === 4202) {
+        if (chainId === 2810) {
             if (ethersTxStatus.isProcessing) return "processing";
             if (ethersTxStatus.isSuccess) return "success";
             if (ethersTxStatus.isError) return "error";
@@ -201,9 +201,9 @@ const PaymentStatus = ({
     const statusState = getStatusState();
 
     // Use chain-specific error message
-    const displayError = chainId === 4202 ? ethersTxStatus.error : txError;
-    const displayIsError = chainId === 4202 ? ethersTxStatus.isError : isTxError;
-    const displayIsSuccess = chainId === 4202 ? ethersTxStatus.isSuccess : isTxSuccess;
+    const displayError = chainId === 2810 ? ethersTxStatus.error : txError;
+    const displayIsError = chainId === 2810 ? ethersTxStatus.isError : isTxError;
+    const displayIsSuccess = chainId === 2810 ? ethersTxStatus.isSuccess : isTxSuccess;
 
     return (
         <motion.div

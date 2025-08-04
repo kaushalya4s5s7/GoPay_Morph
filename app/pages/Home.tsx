@@ -30,7 +30,7 @@ function LandingPage() {
       <ProblemSolution />
       <GlobalPayrollFeatureCarousel />
       <GlobalCoverage />
-      {/* <LiveStats /> */}
+      <LiveStats />
       <UseCases />
       <Testimonials />
       <Pricing />

@@ -62,18 +62,18 @@ const PaymentsPage: React.FC = () => {
     const { isLoading: isTxLoading, isSuccess: isTxSuccess, isError: isTxErrorStatus } =
         useWaitForTransactionReceipt({ hash: wagmiTxHash });
 
-    // State for Lisk chain transaction hash
-    const [LiskTxHash, setLiskTxHash] = useState<`0x${string}` | undefined>(undefined);
+    // State for Morph chain transaction hash
+    const [MorphTxHash, setMorphTxHash] = useState<`0x${string}` | undefined>(undefined);
 
 
     useEffect(() => {
         if (wagmiTxHash) {
             setTxHash(wagmiTxHash as `0x${string}`);
-        } else if (LiskTxHash) {
-            setTxHash(LiskTxHash);
+        } else if (MorphTxHash) {
+            setTxHash(MorphTxHash);
         }
 
-    }, [wagmiTxHash, LiskTxHash]);
+    }, [wagmiTxHash, MorphTxHash]);
 
     // Derived loading state
     const isLoadingDerived = isApproving || isSending || isWritePending || isTxLoading;
@@ -99,17 +99,17 @@ const PaymentsPage: React.FC = () => {
                 !!address &&
                 selectedToken?.address !== NATIVE_ADDRESS &&
                 !!getTransferContract() &&
-                selectedChain?.id !== 4202 // Disable for Lisk chain
+                selectedChain?.id !== 2810 // Disable for Morph chain
         }
     });
 
     // Combined allowance value
-    const allowance = selectedChain?.id === 4202 ? ethersAllowance : wagmiAllowance;
+    const allowance = selectedChain?.id === 2810 ? ethersAllowance : wagmiAllowance;
 
     // Override refetchAllowance to work with both methods
     const refetchAllowance = async () => {
-        if (selectedChain?.id === 4202) {
-            // For Lisk, manually trigger the ethers effect logic
+        if (selectedChain?.id === 2810) {
+            // For Morph, manually trigger the ethers effect logic
             if (
                 isConnected &&
                 selectedToken?.address !== NATIVE_ADDRESS &&
@@ -190,7 +190,7 @@ const PaymentsPage: React.FC = () => {
 
 
     useEffect(() => {
-        if (selectedChain?.id === 4202 && txHash && !isSending) {
+        if (selectedChain?.id === 2810 && txHash && !isSending) {
             const checkEthersTxStatus = async () => {
                 try {
                     if (!window.ethereum) return;
@@ -205,7 +205,7 @@ const PaymentsPage: React.FC = () => {
                                 setShowPaymentStatus(false);
                                 setApprovalTxHash(undefined);
                                 setTxError('');
-                                setLiskTxHash(undefined);
+                                setMorphTxHash(undefined);
                             }, 5000);
                         }, 2000);
                         return;
@@ -216,7 +216,7 @@ const PaymentsPage: React.FC = () => {
                     }
                     setTimeout(checkEthersTxStatus, 3000);
                 } catch (error) {
-                    console.error("Error checking Lisk transaction:", error);
+                    console.error("Error checking Morph transaction:", error);
                 }
             };
             checkEthersTxStatus();
@@ -295,7 +295,7 @@ const PaymentsPage: React.FC = () => {
     useEffect(() => {
         const checkEthersAllowance = async () => {
             if (
-                selectedChain?.id === 4202 &&
+                selectedChain?.id === 2810 &&
                 isConnected &&
                 selectedToken?.address !== NATIVE_ADDRESS &&
                 address &&
@@ -417,7 +417,7 @@ const PaymentsPage: React.FC = () => {
             if (response.status === "success") {
                 toast.success("Payroll record saved successfully");
                 setTxHash(undefined);
-                setLiskTxHash(undefined);
+                setMorphTxHash(undefined);
                 setApprovalTxHash(undefined);
             } else {
                 toast.error("Failed to save payroll record");
@@ -447,8 +447,8 @@ const PaymentsPage: React.FC = () => {
             const { recipients, amounts } = getRecipientsAndAmounts();
             const totalAmount = amounts.reduce((sum, amount) => sum + amount, BigInt(0));
 
-            if (selectedChain?.id === 4202) {
-                // Lisk chain logic (ethers.js)
+            if (selectedChain?.id === 2810) {
+                // Morph chain logic (ethers.js)
                 try {
                     const provider = new ethers.BrowserProvider(window.ethereum);
                     const signer = await provider.getSigner();
@@ -478,7 +478,7 @@ const PaymentsPage: React.FC = () => {
                             : await contract.bulkTransfer(selectedToken.address as `0x${string}`, recipients, amounts, { gasLimit: 400000 });
                         
                         const finalTxHash = tx.hash as `0x${string}`;
-                        setLiskTxHash(finalTxHash);
+                        setMorphTxHash(finalTxHash);
                         setTxHash(finalTxHash);
                         await logPayrollTransaction(finalTxHash);
                     } catch (error: any) {
@@ -651,7 +651,7 @@ const PaymentsPage: React.FC = () => {
                         setShowPaymentStatus(false);
                         setApprovalTxHash(undefined);
                         setTxError('');
-                        setLiskTxHash(undefined);
+                        setMorphTxHash(undefined);
                         setTxHash(undefined);
                         setSelectedEmployees([]);
                     }}

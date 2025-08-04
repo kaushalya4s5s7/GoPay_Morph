@@ -97,10 +97,7 @@ export default function LiveStats() {
         </div>
 
         {/* Spinning Logos Section */}
-        <div className="flex justify-center mb-1">
-          <SpinningLogosDemo />
-        </div>
-
+      
         <div className="text-center mt-1">
           <div className="inline-flex items-center space-x-2 bg-white/10 px-6 py-3 rounded-full">
             <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse" />

@@ -54,8 +54,8 @@ const PaymentSidebar: React.FC<PaymentsSidebarProps> = ({
                                 className={`flex items-center ${open ? 'justify-start w-full py-2 px-3' : 'justify-center w-[44px] h-[44px] p-0'} gap-2 relative rounded-lg backdrop-blur-md bg-gray-200/30 border border-gray-300/50 shadow-md hover:shadow-lg transition-all duration-300`}
                                 title="Transaction Logs"
                             >
-                                <ClipboardList className="h-5 w-5 text-black" />
-                                {open && <span className="font-medium text-sm whitespace-nowrap text-black">Logs</span>}
+                                <ClipboardList className="h-5 w-5 text-white" />
+                                {open && <span className="font-medium text-sm whitespace-nowrap text-white">Logs</span>}
                             </motion.button>
                             {/* Configure Payments Button */}
                             <motion.button
@@ -65,8 +65,8 @@ const PaymentSidebar: React.FC<PaymentsSidebarProps> = ({
                                 className={`flex items-center ${open ? 'justify-start w-full py-2 px-3' : 'justify-center w-[44px] h-[44px] p-0'} gap-2 relative rounded-lg backdrop-blur-md bg-gray-200/30 border border-gray-300/50 shadow-md hover:shadow-lg transition-all duration-300`}
                                 title="Configure Payments"
                             >
-                                <Settings className="h-5 w-5 text-black" />
-                                {open && <span className="font-medium text-sm whitespace-nowrap text-black">Configure</span>}
+                                <Settings className="h-5 w-5 text-white" />
+                                {open && <span className="font-medium text-sm whitespace-nowrap text-white">Configure</span>}
                             </motion.button>
                             {/* Logout Button */}
                             <motion.button
