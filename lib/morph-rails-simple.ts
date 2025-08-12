@@ -18,12 +18,12 @@ export const MORPH_CONFIG = {
 };
 
 export class MorphRailsService {
-  private l1Provider: ethers.JsonRpcProvider;
-  private l2Provider: ethers.JsonRpcProvider;
+  private l1Provider: ethers.providers.JsonRpcProvider;
+  private l2Provider: ethers.providers.JsonRpcProvider;
 
   constructor() {
-    this.l1Provider = new ethers.JsonRpcProvider(MORPH_CONFIG.L1_RPC);
-    this.l2Provider = new ethers.JsonRpcProvider(MORPH_CONFIG.L2_RPC);
+    this.l1Provider = new ethers.providers.JsonRpcProvider(MORPH_CONFIG.L1_RPC);
+    this.l2Provider = new ethers.providers.JsonRpcProvider(MORPH_CONFIG.L2_RPC);
   }
 
   /**
@@ -49,7 +49,7 @@ export class MorphRailsService {
 
       // Use L1ETHGateway for ETH deposits
       const l1EthGateway = new ethers.Contract(
-        ethers.getAddress(BRIDGE_ADDRESSES.L1_ETH_GATEWAY),
+        ethers.utils.getAddress(BRIDGE_ADDRESSES.L1_ETH_GATEWAY),
         [
           'function depositETH(uint256 _amount, uint256 _gasLimit) payable external'
         ],
@@ -63,7 +63,7 @@ export class MorphRailsService {
         {
           // For Morph ETH bridge: msg.value = deposit_amount + l2_gas_fee
           // L2 gas fee is estimated as gasLimit * gasPrice (roughly 0.001 ETH)
-          value: BigInt(amount) + ethers.parseEther("0.003") // Amount + L2 gas fees
+          value: ethers.BigNumber.from(amount).add(ethers.utils.parseEther("0.003")) // Amount + L2 gas fees
         }
       );
 
@@ -112,9 +112,9 @@ export class MorphRailsService {
       let checksummedBridge: string;
 
       try {
-        checksummedL1Token = ethers.getAddress(l1TokenAddress);
-        checksummedL2Token = ethers.getAddress(l2TokenAddress);
-        checksummedBridge = ethers.getAddress(BRIDGE_ADDRESSES.L1_STANDARD_BRIDGE);
+        checksummedL1Token = ethers.utils.getAddress(l1TokenAddress);
+        checksummedL2Token = ethers.utils.getAddress(l2TokenAddress);
+        checksummedBridge = ethers.utils.getAddress(BRIDGE_ADDRESSES.L1_STANDARD_BRIDGE);
       } catch (addressError) {
         console.error('Address validation error:', addressError);
         throw new Error('Invalid token or bridge address format');
@@ -153,7 +153,7 @@ export class MorphRailsService {
         200000, // L2 gas limit
         '0x', // empty data
         {
-          value: ethers.parseEther("0.001") // ETH for L2 gas fees
+          value: ethers.utils.parseEther("0.001") // ETH for L2 gas fees
         }
       );
 
@@ -198,9 +198,9 @@ export class MorphRailsService {
       });
 
       // Validate and checksum addresses
-      const checksummedL1Token = ethers.getAddress(l1TokenAddress);
-      const checksummedL2Token = ethers.getAddress(l2TokenAddress);
-      const checksummedBridge = ethers.getAddress(BRIDGE_ADDRESSES.L2_STANDARD_BRIDGE);
+      const checksummedL1Token = ethers.utils.getAddress(l1TokenAddress);
+      const checksummedL2Token = ethers.utils.getAddress(l2TokenAddress);
+      const checksummedBridge = ethers.utils.getAddress(BRIDGE_ADDRESSES.L2_STANDARD_BRIDGE);
 
       // Real L2 → L1 bridge implementation
       const l2Bridge = new ethers.Contract(
@@ -263,7 +263,7 @@ export class MorphRailsService {
   async getL2TokenAddress(l1TokenAddress: string): Promise<string | null> {
     try {
       // Validate and checksum the input address
-      const checksummedInput = ethers.getAddress(l1TokenAddress);
+      const checksummedInput = ethers.utils.getAddress(l1TokenAddress);
       
       // Real Holesky L1 ↔ Morph L2 token mappings (all checksummed)
       const tokenMappings: { [key: string]: string } = {
@@ -290,7 +290,7 @@ export class MorphRailsService {
   async isTokenSupported(tokenAddress: string, isL1: boolean = true): Promise<boolean> {
     try {
       // Validate and checksum the input address
-      const checksummedAddress = ethers.getAddress(tokenAddress);
+      const checksummedAddress = ethers.utils.getAddress(tokenAddress);
       
       // Real Holesky testnet supported tokens (all checksummed)
       const supportedL1Tokens = [

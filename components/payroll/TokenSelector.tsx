@@ -2,7 +2,6 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Wallet, AlertTriangle, PlusCircle, ChevronDown, RefreshCw, BarChart3 } from 'lucide-react';
 import { useBalance } from 'wagmi';
-import { formatUnits } from 'ethers';
 import { NATIVE_ADDRESS, Token } from '@/lib/evm-tokens-mainnet';
 import { ethers } from 'ethers';
 import { is } from '@react-three/fiber/dist/declarations/src/core/utils';
@@ -63,11 +62,11 @@ const TokenSelector = ({
         if (!address || !selectedToken?.address || !window.ethereum) return null;
 
         try {
-            const provider = new ethers.BrowserProvider(window.ethereum);
+            const provider = new ethers.providers.Web3Provider(window.ethereum);
 
             if (selectedToken.address === NATIVE_ADDRESS) {
                 const balance = await provider.getBalance(address as string);
-                return formatUnits(balance, selectedToken.decimals);
+                return ethers.utils.formatUnits(balance, selectedToken.decimals);
             } else {
                 const erc20ABI = [
                     "function balanceOf(address owner) view returns (uint256)",
@@ -76,7 +75,7 @@ const TokenSelector = ({
 
                 const tokenContract = new ethers.Contract(selectedToken.address, erc20ABI, provider);
                 const balance = await tokenContract.balanceOf(address);
-                return formatUnits(balance, selectedToken.decimals);
+                return ethers.utils.formatUnits(balance, selectedToken.decimals);
             }
         } catch (error) {
             console.error("Ethers fallback balance fetch failed:", error);
@@ -86,7 +85,7 @@ const TokenSelector = ({
 
     // Format balance for display - handle both sources
     const formattedBalance = balance
-        ? parseFloat(formatUnits(balance.value, balance.decimals)).toFixed(4)
+        ? parseFloat(ethers.utils.formatUnits(balance.value, balance.decimals)).toFixed(4)
         : fallbackBalance
             ? parseFloat(fallbackBalance).toFixed(4)
             : '0';

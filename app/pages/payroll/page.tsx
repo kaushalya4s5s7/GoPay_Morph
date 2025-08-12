@@ -10,7 +10,7 @@ import { Employee, PayrollData } from "@/lib/interfaces";
 import { employerApi } from "@/api/employerApi";
 import { payrollApi } from "@/api/payrollApi";
 import { toast } from "react-hot-toast";
-import { parseUnits } from 'ethers';
+import { ethers } from 'ethers';
 import { contractMainnetAddresses as transferContract } from '@/lib/evm-tokens-mainnet';
 import { allMainnetChains as chains, NATIVE_ADDRESS } from '@/lib/evm-chains-mainnet';
 import { tokensPerMainnetChain as tokens } from '@/lib/evm-tokens-mainnet';
@@ -23,7 +23,6 @@ import useFullPageLoader from "@/hooks/usePageLoader";
 import Loader from "@/components/ui/loader";
 import { Home } from "lucide-react";
 import Link from "next/link";
-import { ethers } from 'ethers';
 
 const PaymentsPage: React.FC = () => {
     // Original state
@@ -79,7 +78,7 @@ const PaymentsPage: React.FC = () => {
     const isLoadingDerived = isApproving || isSending || isWritePending || isTxLoading;
 
     // Ethers-based allowance state
-    const [ethersAllowance, setEthersAllowance] = useState<bigint | undefined>(undefined);
+    const [ethersAllowance, setEthersAllowance] = useState<ethers.BigNumber | undefined>(undefined);
 
     // Wagmi allowance hook
     const { data: wagmiAllowance, refetch: refetchWagmiAllowance } = useReadContract({
@@ -117,7 +116,7 @@ const PaymentsPage: React.FC = () => {
                 window.ethereum
             ) {
                 try {
-                    const provider = new ethers.BrowserProvider(window.ethereum);
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const tokenContract = new ethers.Contract(
                         selectedToken.address,
                         erc20Abi,
@@ -129,7 +128,7 @@ const PaymentsPage: React.FC = () => {
                         getTransferContract()
                     );
 
-                    setEthersAllowance(BigInt(allowanceResult.toString()));
+                    setEthersAllowance(allowanceResult);
                 } catch (error) {
                     console.error("Error fetching allowance with ethers:", error);
                 }
@@ -195,7 +194,7 @@ const PaymentsPage: React.FC = () => {
                 try {
                     if (!window.ethereum) return;
 
-                    const provider = new ethers.BrowserProvider(window.ethereum);
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const receipt = await provider.getTransactionReceipt(txHash);
 
                     if (receipt && receipt.status === 1) {
@@ -273,7 +272,7 @@ const PaymentsPage: React.FC = () => {
             recipients: selectedEmployeeData.map(emp => emp.wallet as `0x${string}`),
             amounts: selectedEmployeeData.map(emp => {
                 const tokenAmount = usdToToken(emp.salary);
-                return parseUnits(tokenAmount, selectedToken.decimals);
+                return ethers.utils.parseUnits(tokenAmount, selectedToken.decimals);
             })
         };
     };
@@ -302,7 +301,7 @@ const PaymentsPage: React.FC = () => {
                 window.ethereum
             ) {
                 try {
-                    const provider = new ethers.BrowserProvider(window.ethereum);
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const tokenContract = new ethers.Contract(
                         selectedToken.address,
                         erc20Abi,
@@ -312,7 +311,7 @@ const PaymentsPage: React.FC = () => {
                         address,
                         getTransferContract()
                     );
-                    setEthersAllowance(BigInt(allowanceResult.toString()));
+                    setEthersAllowance(allowanceResult);
                 } catch (error) {
                     console.error("Error fetching allowance with ethers:", error);
                     setEthersAllowance(undefined);
@@ -330,8 +329,18 @@ const PaymentsPage: React.FC = () => {
         ) {
             try {
                 const totalAmount = calculateTotalAmount();
-                const parsedAmount = parseUnits(usdToToken(totalAmount.toString()), selectedToken.decimals);
-                setNeedsApproval(allowance < parsedAmount);
+                const parsedAmount = ethers.utils.parseUnits(usdToToken(totalAmount.toString()), selectedToken.decimals);
+                
+                // Handle different allowance types (BigNumber for ethers v5, bigint for wagmi)
+                if (selectedChain?.id === 2810 && allowance && ethers.BigNumber.isBigNumber(allowance)) {
+                    // For Morph chain using ethers v5
+                    setNeedsApproval(allowance.lt(parsedAmount));
+                } else if (allowance && typeof allowance === 'bigint') {
+                    // For other chains using wagmi
+                    setNeedsApproval(allowance < BigInt(parsedAmount.toString()));
+                } else {
+                    setNeedsApproval(false);
+                }
             } catch (e) {
                 // Invalid amount format, ignore
             }
@@ -445,13 +454,17 @@ const PaymentsPage: React.FC = () => {
             }
 
             const { recipients, amounts } = getRecipientsAndAmounts();
-            const totalAmount = amounts.reduce((sum, amount) => sum + amount, BigInt(0));
+            
+            // Handle different amount types based on chain
+            const totalAmount = selectedChain?.id === 2810 
+                ? amounts.reduce((sum, amount) => sum.add(amount), ethers.BigNumber.from(0))
+                : amounts.reduce((sum, amount) => sum + BigInt(amount.toString()), BigInt(0));
 
             if (selectedChain?.id === 2810) {
                 // Morph chain logic (ethers.js)
                 try {
-                    const provider = new ethers.BrowserProvider(window.ethereum);
-                    const signer = await provider.getSigner();
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
+                    const signer = provider.getSigner();
 
                     if (selectedToken.address !== NATIVE_ADDRESS && needsApproval) {
                         setIsApproving(true);
@@ -459,7 +472,7 @@ const PaymentsPage: React.FC = () => {
                         try {
                             const approvalTx = await tokenContract.approve(transferContractAddress, totalAmount, { gasLimit: 400000 });
                             setApprovalTxHash(approvalTx.hash as `0x${string}`);
-                            const approvalReceipt = await provider.waitForTransaction(approvalTx.hash);
+                            const approvalReceipt = await approvalTx.wait();
                             if (approvalReceipt?.status !== 1) throw new Error('Approval transaction failed');
                             setIsApproving(false);
                             await refetchAllowance();
@@ -494,6 +507,9 @@ const PaymentsPage: React.FC = () => {
                 }
             } else {
                 // Wagmi logic for other chains
+                const wagmiTotalAmount = BigInt(totalAmount.toString());
+                const wagmiAmounts = amounts.map(amount => BigInt(amount.toString()));
+                
                 if (selectedToken.address !== NATIVE_ADDRESS && needsApproval) {
                     setIsApproving(true);
                     try {
@@ -501,7 +517,7 @@ const PaymentsPage: React.FC = () => {
                             address: selectedToken.address as `0x${string}`,
                             abi: erc20Abi,
                             functionName: 'approve',
-                            args: [transferContractAddress as `0x${string}`, totalAmount],
+                            args: [transferContractAddress as `0x${string}`, wagmiTotalAmount],
                             chainId: selectedChain.id,
                             gas: BigInt(400000)
                         });
@@ -509,14 +525,14 @@ const PaymentsPage: React.FC = () => {
                         const approvalReceipt = await waitForTransactionReceipt(config, { chainId: selectedChain.id, hash: approvalHash });
                         if (approvalReceipt.status !== 'success') throw new Error('Approval transaction failed');
                         setIsApproving(false);
-                        await sendTransactionAfterApproval(transferContractAddress, recipients, amounts, totalAmount);
+                        await sendTransactionAfterApproval(transferContractAddress, recipients, wagmiAmounts, wagmiTotalAmount);
                     } catch (error: any) {
                         setIsApproving(false);
                         setTxError(error.message || 'Approval failed');
                         return;
                     }
                 } else {
-                    await sendTransactionAfterApproval(transferContractAddress, recipients, amounts, totalAmount);
+                    await sendTransactionAfterApproval(transferContractAddress, recipients, wagmiAmounts, wagmiTotalAmount);
                 }
             }
         } catch (error: any) {

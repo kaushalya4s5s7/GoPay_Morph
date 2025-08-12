@@ -176,7 +176,7 @@ async function fetchPriceFromCoinGecko(tokenSymbol: string): Promise<number | nu
 
 // Get exchange rate from USD to Token (inverse of price feed)
 export async function getExchangeRate(
-    provider: ethers.JsonRpcProvider,
+    provider: ethers.providers.JsonRpcProvider,
     tokenSymbol: string,
     chainId: number
 ): Promise<number> {

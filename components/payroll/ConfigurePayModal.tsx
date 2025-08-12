@@ -138,7 +138,7 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
       // Create ethers provider from the Wagmi publicClient
       let provider;
       if (publicClient && 'transport' in publicClient && 'url' in publicClient.transport) {
-        provider = new ethers.JsonRpcProvider(publicClient.transport.url);
+        provider = new ethers.providers.JsonRpcProvider(publicClient.transport.url);
       } else {
         // Fallback to a default provider if we can't get one from publicClient
         const chainConfig = chains.find(c => c.id === chainForRate);
@@ -146,7 +146,7 @@ const ConfigurePayModal: React.FC<ConfigurePayModalProps> = ({
           throw new Error(`No RPC URL found for chain ${chainForRate}`);
         }
 
-        provider = new ethers.JsonRpcProvider(chainConfig.rpcUrls.default.http[0]);
+        provider = new ethers.providers.JsonRpcProvider(chainConfig.rpcUrls.default.http[0]);
       }
 
       // Only show loading delay for manual updates, not auto-updates

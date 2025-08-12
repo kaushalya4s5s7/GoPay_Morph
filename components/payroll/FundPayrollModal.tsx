@@ -58,8 +58,8 @@ const FundPayrollModal: React.FC<FundPayrollModalProps> = ({
       setStep('depositing');
       setError('');
 
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = provider.getSigner();
 
       // Verify signer is connected to the right network
       const network = await provider.getNetwork();
@@ -67,20 +67,20 @@ const FundPayrollModal: React.FC<FundPayrollModalProps> = ({
         throw new Error(`Wrong network. Please connect to ${ethereum.name}`);
       }
 
-      const amountWei = ethers.parseUnits(amount, selectedToken.decimals);
+      const amountWei = ethers.utils.parseUnits(amount, selectedToken.decimals);
       
       let depositTxHash: string | null;
       
       // Check if this is an ETH deposit
       if (selectedToken.address === '0x0000000000000000000000000000000000000000') {
         // For ETH deposits, check if user has enough ETH for amount + gas fees
-        const gasFeesETH = ethers.parseEther("0.003"); // Estimated L2 gas fees
-        const totalRequired = amountWei + gasFeesETH;
+        const gasFeesETH = ethers.utils.parseEther("0.003"); // Estimated L2 gas fees
+        const totalRequired = amountWei.add(gasFeesETH);
         
         console.log('ETH Deposit:', {
-          depositAmount: ethers.formatEther(amountWei),
-          gasFees: ethers.formatEther(gasFeesETH),
-          totalRequired: ethers.formatEther(totalRequired)
+          depositAmount: ethers.utils.formatEther(amountWei),
+          gasFees: ethers.utils.formatEther(gasFeesETH),
+          totalRequired: ethers.utils.formatEther(totalRequired)
         });
         
         // Use ETH deposit function

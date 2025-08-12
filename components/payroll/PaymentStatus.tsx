@@ -65,7 +65,7 @@ const PaymentStatus = ({
                     }
 
                     // Connect to browser provider
-                    const provider = new ethers.BrowserProvider(window.ethereum);
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
                     setEthersTxStatus(prev => ({ ...prev, isProcessing: true }));
 
                     // Get transaction receipt
@@ -124,7 +124,7 @@ const PaymentStatus = ({
                         return; // Silently exit if no provider
                     }
 
-                    const provider = new ethers.BrowserProvider(window.ethereum);
+                    const provider = new ethers.providers.Web3Provider(window.ethereum);
                     const txReceipt = await provider.getTransactionReceipt(approvalTxHash);
 
                     if (!txReceipt) {
