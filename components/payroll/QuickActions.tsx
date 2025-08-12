@@ -8,16 +8,20 @@ import {
   Upload,
   ArrowUpRight,
   ChevronDown,
-  X
+  X,
+  DollarSign
 } from "lucide-react";
+import FundPayrollModal from './FundPayrollModal';
 
 interface QuickActionsProps {
   onAddEmployee: () => void;
   onBulkUpload: () => void;
+  onFundingComplete?: (txHash: string, amount: string) => void;
 }
 
-const QuickActions: React.FC<QuickActionsProps> = ({ onAddEmployee, onBulkUpload }) => {
+const QuickActions: React.FC<QuickActionsProps> = ({ onAddEmployee, onBulkUpload, onFundingComplete }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showFundingModal, setShowFundingModal] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Handle click outside to close dropdown
@@ -37,8 +41,17 @@ const QuickActions: React.FC<QuickActionsProps> = ({ onAddEmployee, onBulkUpload
   // Define quick action cards
   const actionCards = [
     {
+      title: "Fund Payroll",
+      description: "Deposit L1 → L2 funds",
+      icon: DollarSign,
+      onClick: () => {
+        setShowFundingModal(true);
+        setIsOpen(false);
+      }
+    },
+    {
       title: "Add Employee",
-      description: "Add a new team member", // Shortened description
+      description: "Add a new team member",
       icon: UserPlus,
       onClick: () => {
         onAddEmployee();
@@ -47,7 +60,7 @@ const QuickActions: React.FC<QuickActionsProps> = ({ onAddEmployee, onBulkUpload
     },
     {
       title: "Bulk Upload",
-      description: "Import multiple employees", // Shortened description
+      description: "Import multiple employees",
       icon: Upload,
       onClick: () => {
         onBulkUpload();
@@ -157,6 +170,13 @@ const QuickActions: React.FC<QuickActionsProps> = ({ onAddEmployee, onBulkUpload
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Funding Modal */}
+      <FundPayrollModal
+        isOpen={showFundingModal}
+        onClose={() => setShowFundingModal(false)}
+        onFundingComplete={onFundingComplete}
+      />
     </div>
   );
 };

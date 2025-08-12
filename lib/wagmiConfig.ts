@@ -1,6 +1,5 @@
 import { getDefaultConfig, Chain } from '@rainbow-me/rainbowkit';
-import { morph } from 'viem/chains';
-
+import { holesky } from 'viem/chains';
 
 const morphHolesky = {
   id: 2810,
@@ -25,17 +24,12 @@ const morphHolesky = {
       url: "https://explorer-holesky.morphl2.io/"
     }
   }
-}as const satisfies Chain;
-
-
-
-
+} as const satisfies Chain;
 
 const config = getDefaultConfig({
     appName: 'GoPay',
     projectId: '23c5e43972b3775ee6ed4f74f3e76efb',
-    chains: [morphHolesky],
+    chains: [holesky, morphHolesky], // Added Holesky testnet
 });
-
 
 export { config };

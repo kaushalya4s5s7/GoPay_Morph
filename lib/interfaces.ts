@@ -96,3 +96,22 @@ export interface PaymentQR {
     name: string;
     image: string;
 }
+
+// Morph Rails specific interfaces
+export interface MorphRailsPayrollData extends PayrollData {
+    l1TxHash?: string; // L1 funding transaction
+    l2TxHash?: string; // L2 bulk payment transaction  
+    withdrawalHashes?: string[]; // L2->L1 withdrawal hashes
+    finalizationHashes?: string[]; // L1 finalization hashes
+    status: 'FUNDING' | 'PROCESSING' | 'WITHDRAWING' | 'FINALIZING' | 'COMPLETED' | 'FAILED';
+}
+
+export interface TreasuryOperation {
+    id: string;
+    type: 'DEPOSIT' | 'WITHDRAWAL';
+    amount: string;
+    token: string;
+    txHash: string;
+    timestamp: number;
+    status: 'PENDING' | 'COMPLETED' | 'FAILED';
+}
